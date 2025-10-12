@@ -1,26 +1,23 @@
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
-        """
-        we put a target counter, a dict window, and when all chars are in target are satisfied we keep shrinking to find an even smaller solution
-        """
-        k = len(t)
-        n = len(s)
         target = collections.Counter(t)
-        window = collections.defaultdict(int)
-        full_chars, miss_chars = 0, len(target)
+        window = collections.Counter()
         min_len = float('inf')
-        result = ""
+        required = len(target)
+        formed = 0
+        ans = (0, 0)
         l = 0
-        for r in range(n):
-            window[s[r]] += 1
-            if s[r] in target and window[s[r]] == target[s[r]]:
-                full_chars += 1
-            while full_chars == miss_chars:
+        for r, char in enumerate(s):
+            window[char] += 1
+            if char in target and window[char] == target[char]:
+                formed += 1
+
+            while formed == required:
                 if r - l + 1 < min_len:
                     min_len = r - l + 1
-                    result = s[l:r+1]
+                    ans = (l, r + 1)
                 if s[l] in target and window[s[l]] == target[s[l]]:
-                    full_chars -= 1
+                    formed -= 1
                 window[s[l]] -= 1
                 l += 1
-        return result
+        return s[ans[0]:ans[1]] if min_len != float('inf') else ""
