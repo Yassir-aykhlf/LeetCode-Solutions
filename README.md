@@ -1,15 +1,3 @@
-# Project Name
-
-![Header](https://capsule-render.vercel.app/api?type=waving&color=gradient&height=200&section=header&text=Your%20Project%20Name&fontSize=80&fontAlignY=35&animation=twinkling&fontColor=ffffff)
-
-<div align="center">
-
-[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&color=2E9EF7&center=true&vCenter=true&width=435&lines=Welcome+to+my+project!;Check+out+the+stats+below)](https://git.io/typing-svg)
-
-</div>
-
-## 📊 GitHub Statistics
-
 <div align="center">
 
 ### Overall Stats
