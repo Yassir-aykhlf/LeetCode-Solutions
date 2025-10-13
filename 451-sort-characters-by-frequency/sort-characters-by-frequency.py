@@ -1,4 +1,4 @@
 class Solution:
     def frequencySort(self, s: str) -> str:
-        freq = Counter(s)
-        return ''.join(char * count for char, count in freq.most_common())
+        freqMap = Counter(s)
+        return ''.join([char * freqMap[char] for char in sorted(freqMap.keys(), key=lambda x:freqMap[x], reverse=True)])
