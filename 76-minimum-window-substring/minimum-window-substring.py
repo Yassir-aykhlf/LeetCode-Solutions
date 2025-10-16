@@ -1,23 +1,21 @@
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
+        result = ""
         target = collections.Counter(t)
         window = collections.Counter()
         min_len = float('inf')
-        required = len(target)
-        formed = 0
-        ans = (0, 0)
+        have, need = 0, len(target)
         l = 0
-        for r, char in enumerate(s):
-            window[char] += 1
-            if char in target and window[char] == target[char]:
-                formed += 1
-
-            while formed == required:
+        for r in range(len(s)):
+            window[s[r]] += 1
+            if s[r] in target and window[s[r]] == target[s[r]]:
+                have += 1
+            while have == need:
                 if r - l + 1 < min_len:
                     min_len = r - l + 1
-                    ans = (l, r + 1)
+                    result = s[l:r+1]
                 if s[l] in target and window[s[l]] == target[s[l]]:
-                    formed -= 1
+                    have -= 1
                 window[s[l]] -= 1
                 l += 1
-        return s[ans[0]:ans[1]] if min_len != float('inf') else ""
+        return result
