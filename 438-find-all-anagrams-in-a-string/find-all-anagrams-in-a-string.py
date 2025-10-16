@@ -1,10 +1,10 @@
 class Solution:
     def findAnagrams(self, s: str, p: str) -> List[int]:
-        result = []
-        target = collections.Counter(p)
-        n = len(s)
+        target =collections.Counter(p)
         k = len(p)
+        n = len(s)
         window = collections.Counter(s[:k])
+        result = []
         if window == target:
             result.append(0)
         for r in range(k, n):
