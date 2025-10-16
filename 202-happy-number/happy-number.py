@@ -1,15 +1,15 @@
 class Solution:
     def isHappy(self, n: int) -> bool:
-        def calc(num):
+        def mutate(n):
             res = 0
-            while num > 0:
-                res += (num % 10) ** 2
-                num //= 10
+            while n:
+                res += (n % 10) * (n % 10)
+                n //= 10
             return res
         slow = n
         fast = n
         while True:
-            slow = calc(slow)
-            fast = calc(calc(fast))
-            if fast == slow:
+            slow = mutate(slow)
+            fast = mutate(mutate(fast))
+            if slow == fast:
                 return slow == 1
