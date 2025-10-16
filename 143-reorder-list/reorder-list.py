@@ -5,22 +5,20 @@
 #         self.next = next
 class Solution:
     def reorderList(self, head: Optional[ListNode]) -> None:
-        if not head:
-            return None
-        slow = fast = head
+        slow = fast =head
         while fast and fast.next:
             slow = slow.next
-            fast = fast.next.next
+            fast =fast.next.next
         prev = None
         cur = slow
         while cur:
             nxt = cur.next
-            cur.next = prev
+            cur.next= prev
             prev = cur
             cur = nxt
-        L1, L2 = head, prev
-        while L2.next:
-            L1_next, L2_next = L1.next, L2.next
-            L1.next = L2
-            L2.next = L1_next
-            L1, L2 = L1_next, L2_next
+        l1,l2=head,prev
+        while l2.next:
+            l1Nxt, l2Nxt = l1.next, l2.next
+            l1.next = l2
+            l2.next = l1Nxt
+            l1, l2 = l1Nxt, l2Nxt
