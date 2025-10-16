@@ -1,11 +1,11 @@
 class Solution:
     def camelMatch(self, queries: List[str], pattern: str) -> List[bool]:
         def isMatch(query):
-            index = 0
+            idx = 0
             for c in query:
-                if index < len(pattern) and pattern[index] == c:
-                    index += 1
+                if idx < len(pattern) and c == pattern[idx]:
+                    idx += 1
                 elif c.isupper():
                     return False
-            return index == len(pattern)
+            return len(pattern) == idx
         return [isMatch(query) for query in queries]
