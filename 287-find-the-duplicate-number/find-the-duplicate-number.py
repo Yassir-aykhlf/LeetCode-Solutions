@@ -5,7 +5,7 @@ class Solution:
         while True:
             slow = nums[slow]
             fast = nums[nums[fast]]
-            if nums[fast] == nums[slow]:
+            if slow == fast:
                 break
         slow = 0
         while nums[slow] != nums[fast]:
