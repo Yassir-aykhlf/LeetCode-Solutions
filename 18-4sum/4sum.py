@@ -9,20 +9,20 @@ class Solution:
             for j in range(i + 1, n - 2):
                 if j > i + 1 and nums[j] == nums[j - 1]:
                     continue
-                l = j + 1
-                r = n - 1
-                while l < r:
-                    comb = nums[i] + nums[j] + nums[l] + nums[r]
+                a = j + 1
+                b = n - 1
+                while a < b:
+                    comb = nums[i] + nums[j] + nums[a] + nums[b]
                     if comb == target:
-                        result.append([nums[i], nums[j], nums[l], nums[r]])
-                        while l < r and nums[l] == nums[l+ 1]:
-                            l += 1
-                        while l < r and nums[r] == nums[r - 1]:
-                            r -= 1
-                        l += 1 
-                        r -= 1
+                        result.append([nums[i], nums[j], nums[a], nums[b]])
+                        while a < b and nums[a] == nums[a + 1]:
+                            a += 1
+                        while a < b and nums[b] == nums[b - 1]:
+                            b -= 1
+                        a += 1
+                        b -= 1
                     elif comb < target:
-                        l += 1
+                        a += 1
                     else:
-                        r -= 1
+                        b -= 1
         return result
