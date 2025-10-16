@@ -1,9 +1,9 @@
 class Solution:
     def numMatchingSubseq(self, s: str, words: List[str]) -> int:
-        alpha = defaultdict(list)
-        count = 0
+        alpha = collections.defaultdict(list)
         for word in words:
             alpha[word[0]].append([word, 0])
+        count = 0
         for c in s:
             group = alpha[c]
             alpha[c] = []
