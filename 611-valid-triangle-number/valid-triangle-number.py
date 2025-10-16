@@ -1,15 +1,16 @@
 class Solution:
     def triangleNumber(self, nums: List[int]) -> int:
         nums.sort()
+        n = len(nums)
         count = 0
-        for f in range(len(nums) - 1, 1, -1):
-            r = f - 1
-            l = 0
-            while l < r:
-                res = nums[l] + nums[r]
+        for f in range(n - 1, 1, -1):
+            a = 0
+            b = f - 1
+            while a < b:
+                res = nums[a] + nums[b]
                 if res > nums[f]:
-                    count += r - l
-                    r -= 1
+                    count += b - a
+                    b -= 1
                 else:
-                    l += 1
+                    a += 1
         return count
