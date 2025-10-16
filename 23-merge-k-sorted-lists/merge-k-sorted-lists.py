@@ -7,17 +7,26 @@ class Solution:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
         if not lists:
             return None
-        dummy = ListNode(-1)
-        cur = dummy
-        while any(lst for lst in lists):
-            min_val = float('inf')
-            min_idx = -1
-            for i in range(len(lists)):
-                if lists[i] and lists[i].val < min_val:
-                    min_val = lists[i].val
-                    min_idx = i
-            if min_idx != -1:
-                cur.next = lists[min_idx]
+
+        def mergeTwoList(l1, l2):
+            dummy = ListNode(-1)
+            cur = dummy
+            while l1 and l2:
+                if l1.val < l2.val:
+                    cur.next = l1
+                    l1 = l1.next
+                else:
+                    cur.next = l2
+                    l2 = l2.next
                 cur = cur.next
-                lists[min_idx] = lists[min_idx].next
-        return dummy.next
+            cur.next = l1 or l2
+            return dummy.next
+
+        while len(lists) > 1:
+            merged = []
+            for i in range(0, len(lists), 2):
+                l1 = lists[i]
+                l2 = lists[i + 1] if i + 1 < len(lists) else None
+                merged.append(mergeTwoList(l1, l2))
+            lists = merged
+        return lists[0] if lists else None
