@@ -3,8 +3,10 @@ class Solution:
         n = len(s)
         target = collections.Counter(t)
         window = collections.defaultdict(int)
-        have, need, result = 0, len(target), ""
+        have = 0
+        need = len(target)
         min_len = float('inf')
+        result = (0, 0)
         l = 0
         for r in range(n):
             window[s[r]] += 1
@@ -12,10 +14,10 @@ class Solution:
                 have += 1
             while have == need:
                 if r - l + 1 < min_len:
-                    min_len = r - l + 1
-                    result = s[l:r+1]
+                    min_len = r -l + 1
+                    result = (l, r + 1)
                 if s[l] in target and window[s[l]] == target[s[l]]:
                     have -= 1
                 window[s[l]] -= 1
                 l += 1
-        return result
+        return s[result[0]: result[1]] if min_len != float('inf') else ""
