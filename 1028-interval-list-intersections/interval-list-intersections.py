@@ -1,13 +1,12 @@
 class Solution:
     def intervalIntersection(self, firstList: List[List[int]], secondList: List[List[int]]) -> List[List[int]]:
-        l1, l2 = firstList, secondList
-        if not l1 or not l2:
+        if not firstList or not secondList:
             return []
         p1, p2 = 0, 0
         result = []
-        while p1 < len(l1) and p2 < len(l2):
-            s1, e1 = l1[p1]
-            s2, e2 = l2[p2]
+        while p1 < len(firstList) and p2 < len(secondList):
+            s1, e1 = firstList[p1]
+            s2, e2 = secondList[p2]
             inter_start = max(s1, s2)
             inter_end = min(e1, e2)
             if inter_start <= inter_end:
