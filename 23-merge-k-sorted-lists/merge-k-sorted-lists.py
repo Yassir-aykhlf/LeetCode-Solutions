@@ -7,18 +7,18 @@ class Solution:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
         if not lists:
             return None
-        def mergeTwo(list1, list2):
+        def mergeTwo(l1, l2):
             dummy = ListNode(-1)
             cur = dummy
-            while list1 and list2:
-                if list1.val < list2.val:
-                    cur.next = list1
-                    list1 = list1.next
+            while l1 and l2:
+                if l1.val < l2.val:
+                    cur.next = l1
+                    l1 = l1.next
                 else:
-                    cur.next = list2
-                    list2 = list2.next
+                    cur.next = l2
+                    l2 = l2.next
                 cur = cur.next
-            cur.next = list1 or list2
+            cur.next = l1 or l2
             return dummy.next
         while len(lists) > 1:
             merged = []
