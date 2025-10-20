@@ -3,7 +3,7 @@ class Solution:
         dq = collections.deque()
         res = []
         for r in range(len(nums)):
-            while dq and nums[r] > nums[dq[-1]]:
+            while dq and nums[dq[-1]] < nums[r]:
                 dq.pop()
             dq.append(r)
             if dq[0] <= r - k:
