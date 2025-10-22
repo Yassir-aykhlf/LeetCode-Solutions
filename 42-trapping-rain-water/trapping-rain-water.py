@@ -1,10 +1,10 @@
 class Solution:
     def trap(self, height: List[int]) -> int:
         n = len(height)
-        maxL = height[0]
-        maxR = height[n - 1]
         l = 0
         r = n - 1
+        maxL = height[l]
+        maxR = height[r]
         res = 0
         while l < r:
             if height[l] < height[r]:
