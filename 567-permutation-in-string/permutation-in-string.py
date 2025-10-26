@@ -1,9 +1,10 @@
 class Solution:
     def checkInclusion(self, s1: str, s2: str) -> bool:
-        target = collections.Counter(s1)
-        k = len(s1)
         n = len(s2)
-        window = collections.Counter(s2[:k])
+        k = len(s1)
+        window_str = s2[:k]
+        target = collections.Counter(s1)
+        window = collections.Counter(window_str)
         if window == target:
             return True
         for r in range(k, n):
