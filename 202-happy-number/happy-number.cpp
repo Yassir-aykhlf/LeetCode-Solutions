@@ -15,7 +15,6 @@ public:
         while (true) {
             slow = calcSum(slow);
             fast = calcSum(calcSum(fast));
-                std::cout << slow << " ";
             if (slow == fast) {
                 return slow == 1;
             }
