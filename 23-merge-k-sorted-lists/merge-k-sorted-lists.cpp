@@ -9,9 +9,9 @@
  * };
  */
 class Solution {
-private:
+public:
     ListNode* mergeTwo(ListNode* l1, ListNode* l2) {
-        ListNode* dummy = new ListNode(-1);
+        ListNode* dummy = new ListNode();
         ListNode* cur = dummy;
         while (l1 && l2) {
             if (l1->val < l2->val) {
@@ -25,11 +25,8 @@ private:
             cur = cur->next;
         }
         cur->next = l1 ? l1 : l2;
-        ListNode* result = dummy->next;
-        delete dummy;
-        return result;
+        return dummy->next;
     }
-public:
     ListNode* mergeKLists(vector<ListNode*>& lists) {
         if (lists.empty()) {
             return nullptr;
@@ -38,7 +35,7 @@ public:
             vector<ListNode*> merged;
             for (int i = 0; i < lists.size(); i += 2) {
                 ListNode* l1 = lists[i];
-                ListNode* l2 = (i + 1 < lists.size()) ? lists[i + 1] : nullptr;
+                ListNode* l2 = ((i + 1) < lists.size()) ? lists[i + 1] : nullptr;
                 merged.push_back(mergeTwo(l1, l2));
             }
             lists = merged;
