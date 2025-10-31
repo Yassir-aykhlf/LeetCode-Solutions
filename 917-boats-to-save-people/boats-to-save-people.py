@@ -5,9 +5,8 @@ class Solution:
         r = len(people) - 1
         count = 0
         while l <= r:
-            weight = people[l] + people[r]
-            if weight <= limit:
+            if people[l] + people[r] <= limit:
                 l += 1
-            count += 1
             r -= 1
+            count += 1
         return count
