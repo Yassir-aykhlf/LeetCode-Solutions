@@ -1,20 +1,15 @@
 class Solution:
     def reverseVowels(self, s: str) -> str:
-        n = len(s)
+        vowels = set("aeiouAEIOU")
         s = list(s)
-        l = 0
-        r = n - 1
-        vowels = set(['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'])
+        l, r = 0, len(s) - 1
         while l < r:
-            if s[l] in vowels and s[r] in vowels:
-                s[l], s[r] = s[r], s[l]
+            if s[l] not in vowels:
                 l += 1
+            elif s[r] not in vowels:
                 r -= 1
-            elif s[l] in vowels:
-                r -= 1
-            elif s[r] in vowels:
-                l += 1
             else:
+                s[l], s[r] = s[r], s[l]
                 l += 1
                 r -= 1
         return ''.join(s)
