@@ -3,7 +3,7 @@ class Solution:
         def build(str):
             stack = []
             for c in str:
-                if c != "#":
+                if c != '#':
                     stack.append(c)
                 elif stack:
                     stack.pop()
