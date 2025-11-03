@@ -6,7 +6,7 @@ class Solution:
         while p1 < len(nums1) and p2 < len(nums2):
             if nums1[p1] > nums2[p2]:
                 return 1
-            elif nums2[p2] > nums1[p1]:
+            elif nums1[p1] < nums2[p2]:
                 return -1
             p1 += 1
             p2 += 1
