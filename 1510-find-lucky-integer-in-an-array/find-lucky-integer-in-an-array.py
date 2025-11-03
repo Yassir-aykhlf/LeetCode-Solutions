@@ -1,8 +1,12 @@
 class Solution:
     def findLucky(self, arr: List[int]) -> int:
-        freq = collections.Counter(arr)
-        res = -1
+        freq = {}
+        largest = -1
+        for num in arr:
+            if num not in freq:
+                freq[num] = 0
+            freq[num] += 1
         for num in arr:
             if freq[num] == num:
-                res = max(res, num) 
-        return res
+                largest = max(largest, num)
+        return largest
