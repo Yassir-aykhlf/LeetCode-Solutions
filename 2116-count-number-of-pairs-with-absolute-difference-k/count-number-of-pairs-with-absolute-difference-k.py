@@ -4,5 +4,5 @@ class Solution:
         count = 0
         for num in freq:
             if num + k in freq:
-                count += freq[num + k] * freq[num]
+                count += freq[num] * freq[num + k]
         return count
