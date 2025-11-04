@@ -1,9 +1,7 @@
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        groups = {}
-        for str in strs:
-            key = ''.join(sorted(str))
-            if key not in groups:
-                groups[key] = []
-            groups[key].append(str)
-        return [lst for lst in groups.values()]
+        group = collections.defaultdict(list)
+        for str_ in strs:
+            code = ''.join(sorted(str_))
+            group[code].append(str_)
+        return [arr for arr in group.values()]
