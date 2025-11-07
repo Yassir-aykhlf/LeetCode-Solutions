@@ -6,7 +6,7 @@ class Solution:
         for row in range(9):
             for col in range(9):
                 cell = board[row][col]
-                if cell == ".":
+                if cell == '.':
                     continue
                 box = (row // 3, col // 3)
                 if (cell in rows[row] or
