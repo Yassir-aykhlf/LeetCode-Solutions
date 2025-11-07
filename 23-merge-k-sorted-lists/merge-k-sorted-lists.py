@@ -8,7 +8,7 @@ class Solution:
         if not lists:
             return None
         def mergeTwo(l1, l2):
-            dummy = ListNode(-1)
+            dummy = ListNode()
             cur = dummy
             while l1 and l2:
                 if l1.val < l2.val:
@@ -22,7 +22,7 @@ class Solution:
             return dummy.next
         while len(lists) > 1:
             merged = []
-            for i in range(0 , len(lists), 2):
+            for i in range(0, len(lists), 2):
                 l1 = lists[i]
                 l2 = lists[i + 1] if i + 1 < len(lists) else None
                 merged.append(mergeTwo(l1, l2))
