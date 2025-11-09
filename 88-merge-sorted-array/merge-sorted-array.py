@@ -1,6 +1,11 @@
 class Solution:
     def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
-        p1, p2, r = m - 1, n - 1, m+n-1
+        """
+        Do not return anything, modify nums1 in-place instead.
+        """
+        p1 = m - 1
+        p2 = n - 1
+        r = m + n - 1
         while r >= 0 and p1 >= 0 and p2 >= 0:
             if nums1[p1] > nums2[p2]:
                 nums1[r] = nums1[p1]
@@ -13,3 +18,4 @@ class Solution:
             nums1[r] = nums2[p2]
             p2 -= 1
             r -= 1
+        
