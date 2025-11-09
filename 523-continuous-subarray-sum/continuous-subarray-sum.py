@@ -5,8 +5,9 @@ class Solution:
         for i, num in enumerate(nums):
             cur_sum += num
             cur_rem = cur_sum % k
-            if cur_rem not in remainders:
+            if cur_rem in remainders:
+                if i - remainders[cur_rem] > 1:
+                    return True
+            else:
                 remainders[cur_rem] = i
-            elif i - remainders[cur_rem] >= 2:
-                return True
         return False
