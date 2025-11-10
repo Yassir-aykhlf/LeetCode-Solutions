@@ -30,7 +30,7 @@ public:
     }
     ListNode* mergeKLists(vector<ListNode*>& lists) {
         if (lists.empty()) {
-            return NULL;
+            return nullptr;
         }
         while (lists.size() > 1) {
             vector<ListNode*> merged;
