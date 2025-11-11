@@ -8,5 +8,5 @@ class Solution:
                     count += 1
             else:
                 if num + k in freq:
-                    count += 1
+                    count += 1 
         return count
