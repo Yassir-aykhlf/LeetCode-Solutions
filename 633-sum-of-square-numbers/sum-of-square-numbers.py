@@ -1,13 +1,13 @@
 class Solution:
     def judgeSquareSum(self, c: int) -> bool:
-        l = 0
-        r = isqrt(c)
-        while l <= r:
-            result = l * l + r * r
-            if result == c:
+        a = 0
+        b = isqrt(c)
+        while a <= b:
+            res = a*a + b*b
+            if res == c:
                 return True
-            elif result < c:
-                l += 1
+            elif res < c:
+                a += 1
             else:
-                r -= 1
+                b -= 1
         return False
