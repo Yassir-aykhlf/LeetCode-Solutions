@@ -3,7 +3,6 @@ class Solution:
         nums_s = set(nums)
         longest_seq = 0
         for num in nums_s:
-            # if the a pottential head
             if num - 1 not in nums_s:
                 runner = 1
                 while num + runner in nums_s:
