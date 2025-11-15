@@ -1,6 +1,8 @@
 class Solution:
     def findAndReplacePattern(self, words: List[str], pattern: str) -> List[str]:
-        def isPermutation(word, pattern):
+        def isIsomorphic(word):
+            if len(word) != len(pattern):
+                return False
             word_pattern = {}
             pattern_word = {}
             for w, p in zip(word, pattern):
@@ -11,8 +13,4 @@ class Solution:
                 word_pattern[w] = p
                 pattern_word[p] = w
             return True
-        res = []
-        for word in words:
-            if isPermutation(word, pattern):
-                res.append(word)
-        return res
+        return [word for word in words if isIsomorphic(word)]
