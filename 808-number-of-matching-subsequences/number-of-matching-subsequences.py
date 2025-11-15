@@ -1,16 +1,18 @@
 class Solution:
     def numMatchingSubseq(self, s: str, words: List[str]) -> int:
-        alpha = collections.defaultdict(list)
+        char_words = defaultdict(list)
         for word in words:
-            alpha[word[0]].append([word, 0])
+            char_words[word[0]].append([word, 0])
+        print(char_words)
         count = 0
         for c in s:
-            group = alpha[c]
-            alpha[c] = []
+            group = char_words[c]
+            char_words[c] = []
             for pair in group:
-                pair[1] += 1
-                if len(pair[0]) == pair[1]:
+                word, index = pair
+                index += 1
+                if index == len(word):
                     count += 1
                 else:
-                    alpha[pair[0][pair[1]]].append(pair)
+                    char_words[word[index]].append([word, index])
         return count
