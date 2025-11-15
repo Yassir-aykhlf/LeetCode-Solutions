@@ -3,7 +3,6 @@ class Solution:
         char_words = defaultdict(list)
         for word in words:
             char_words[word[0]].append([word, 0])
-        print(char_words)
         count = 0
         for c in s:
             group = char_words[c]
