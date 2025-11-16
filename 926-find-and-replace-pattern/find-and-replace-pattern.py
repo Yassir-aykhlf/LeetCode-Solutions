@@ -3,14 +3,14 @@ class Solution:
         def isIsomorphic(word):
             if len(word) != len(pattern):
                 return False
-            word_pattern = {}
-            pattern_word = {}
+            w_p = {}
+            p_w = {}
             for w, p in zip(word, pattern):
-                if w in word_pattern and word_pattern[w] != p:
+                if w in w_p and w_p[w] != p:
                     return False
-                if p in pattern_word and pattern_word[p] != w:
+                if p in p_w and p_w[p] != w:
                     return False
-                word_pattern[w] = p
-                pattern_word[p] = w
+                w_p[w] = p
+                p_w[p] = w
             return True
         return [word for word in words if isIsomorphic(word)]
