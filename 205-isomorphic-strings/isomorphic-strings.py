@@ -2,15 +2,13 @@ class Solution:
     def isIsomorphic(self, s: str, t: str) -> bool:
         if len(s) != len(t):
             return False
-        s_to_t = {}
-        t_to_s = {}
-        for s_char, t_char in zip(s, t):
-            if s_char in s_to_t:
-                if s_to_t[s_char] != t_char:
-                    return False
-            if t_char in t_to_s:
-                if t_to_s[t_char] != s_char:
-                    return False
-            s_to_t[s_char] = t_char
-            t_to_s[t_char] = s_char
+        s_t = {}
+        t_s = {}
+        for s_, t_ in zip(s, t):
+            if s_ in s_t and s_t[s_] != t_:
+                return False
+            if t_ in t_s and t_s[t_] != s_:
+                return False
+            s_t[s_] = t_
+            t_s[t_] = s_
         return True
