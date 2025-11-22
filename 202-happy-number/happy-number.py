@@ -1,13 +1,12 @@
 class Solution:
     def isHappy(self, n: int) -> bool:
-        def mutate(n):
+        def mutate(num):
             res = 0
-            while n > 0:
-                res += (n % 10) * (n % 10)
-                n //= 10
+            while num > 0:
+                res += (num % 10) * (num % 10)
+                num //= 10
             return res
-        slow = n
-        fast = n
+        slow = fast = n
         while True:
             slow = mutate(slow)
             fast = mutate(mutate(fast))
