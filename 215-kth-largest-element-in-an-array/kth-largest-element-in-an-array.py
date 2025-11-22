@@ -1,19 +1,20 @@
 class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
-        return sorted(nums)[len(nums) - k]
-        # target = len(nums) - k
-        # def quickSelect(l, r):
+        # n = len(nums)
+        # target_idx = n - k
+        # def partition(l, r):
         #     pivot = nums[r]
         #     i = l
-        #     for j in range(l, r):
-        #         if nums[j] <= pivot:
-        #             nums[i], nums[j] = nums[j], nums[i]
+        #     for cur in range(l, r + 1):
+        #         if nums[cur] < pivot:
+        #             nums[i], nums[cur] = nums[cur], nums[i]
         #             i += 1
         #     nums[i], nums[r] = nums[r], nums[i]
-        #     if i == target:
+        #     if i == target_idx:
         #         return nums[i]
-        #     elif i < target:
-        #         return quickSelect(i + 1, r)
+        #     elif i < target_idx:
+        #         return partition(i + 1, r)
         #     else:
-        #         return quickSelect(l, i - 1)
-        # return quickSelect(0, len(nums) - 1)
+        #         return partition(l, i - 1)
+        # return partition(0, n - 1)
+        return heapq.nlargest(k, nums)[-1]
