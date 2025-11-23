@@ -1,11 +1,11 @@
 class Solution:
     def subdomainVisits(self, cpdomains: List[str]) -> List[str]:
-        group = defaultdict(int)
+        domains = defaultdict(int)
         for cpdomain in cpdomains:
             count_str, domain = cpdomain.split()
             count = int(count_str)
-            group[domain] += count
+            domains[domain] += count
             for i, c in enumerate(domain):
                 if c == '.':
-                    group[domain[i+1:]] += count
-        return [f"{count} {domain}" for domain, count in group.items()]
+                    domains[domain[i+1:]] += count
+        return [f"{count} {domain}" for domain, count in domains.items()]
