@@ -1,13 +1,13 @@
 class Solution:
     def checkSubarraySum(self, nums: List[int], k: int) -> bool:
-        rems = {0: -1}
-        cur_sum = 0
+        rem_index = {0: -1}
+        cur_sum, count = 0, 0
         for i, num in enumerate(nums):
             cur_sum += num
-            rem = cur_sum % k
-            if rem in rems:
-                if i - rems[rem] >= 2:
+            cur_rem = cur_sum % k
+            if cur_rem in rem_index:
+                if i - rem_index[cur_rem] >= 2:
                     return True
             else:
-                rems[rem] = i
-        return False
+                rem_index[cur_rem] = i
+        return False 
