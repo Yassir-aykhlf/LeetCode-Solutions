@@ -1,19 +1,16 @@
 class Solution:
     def maximumSubarraySum(self, nums: List[int], k: int) -> int:
+        window = collections.Counter(nums[:k])
+        cur_sum = sum(nums[:k])
+        max_sum = cur_sum if len(window) == k else 0
         n = len(nums)
-        window = nums[:k]
-        window_sum = sum(window)
-        window_state = collections.Counter(window)
-        max_sum = 0
-        if len(window_state) == k:
-            max_sum = window_sum
         for r in range(k, n):
-            window_state[nums[r]] += 1
-            window_state[nums[r - k]] -= 1
-            window_sum += nums[r]
-            window_sum -= nums[r - k]
-            if window_state[nums[r - k]] == 0:
-                del window_state[nums[r - k]]
-            if len(window_state) == k:
-                max_sum = max(max_sum, window_sum)
+            cur_sum += nums[r]
+            cur_sum -= nums[r - k]
+            window[nums[r]] += 1
+            window[nums[r - k]] -= 1
+            if window[nums[r - k]] == 0:
+                del window[nums[r - k]]
+            if len(window) == k:
+                max_sum = max(max_sum, cur_sum)
         return max_sum
