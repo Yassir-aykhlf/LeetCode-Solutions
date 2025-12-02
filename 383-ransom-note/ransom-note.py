@@ -1,8 +1,9 @@
 class Solution:
     def canConstruct(self, ransomNote: str, magazine: str) -> bool:
-        vault = collections.Counter(magazine)
+        if len(ransomNote) > len(magazine): return False
+        vault = list(magazine)
         for c in ransomNote:
-            vault[c] -= 1
-            if vault[c] < 0:
+            if c not in vault:
                 return False
+            vault.remove(c)
         return True
