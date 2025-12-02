@@ -1,18 +1,16 @@
 class Solution:
     def findAnagrams(self, s: str, p: str) -> List[int]:
-        res = []
-        target = collections.Counter(p)
-        len_p = len(p)
-        len_s = len(s)
-        window_s = s[:len_p]
-        window = collections.Counter(window_s)
-        if window == target:
-            res.append(0)
-        for r in range(len_p, len_s):
+        n = len(s)
+        k = len(p)
+        ref = Counter(p)
+        window = Counter(s[:k])
+        res = [0] if window == ref else []
+        l = 0
+        for r in range(k, n):
             window[s[r]] += 1
-            window[s[r - len_p]] -= 1
-            if window[s[r - len_p]] == 0:
-                del window[s[r - len_p]]
-            if window == target:
-                res.append(r - len_p + 1)
+            window[s[r - k]] -= 1
+            if window[s[r - k]] == 0:
+                del window[s[r - k]]
+            if window == ref:
+                res.append(r - k + 1)
         return res
