@@ -15,13 +15,13 @@ class Solution:
         mid = slow
         prev = None
         while mid:
-            midNext = mid.next
+            midNxt = mid.next
             mid.next = prev
             prev = mid
-            mid = midNext
-        r1, r2 = head, prev
-        while r2.next:
-            r1Next, r2Next = r1.next, r2.next
-            r1.next = r2
-            r2.next = r1Next
-            r1, r2 = r1Next, r2Next
+            mid = midNxt
+        l, r = head, prev
+        while r.next:
+            l_next, r_next = l.next, r.next
+            l.next = r
+            r.next = l_next
+            l, r = l_next, r_next
