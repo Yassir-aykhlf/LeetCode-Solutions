@@ -5,8 +5,8 @@ class Solution:
         count = 0
         for r in range(len(nums)):
             cur_sum += nums[r]
-            target_sum = cur_sum - k
-            if target_sum in prefix:
-                count += prefix[target_sum]
+            prev_slice = cur_sum - k
+            if prev_slice in prefix:
+                count += prefix[prev_slice]
             prefix[cur_sum] = prefix.get(cur_sum, 0) + 1
         return count
