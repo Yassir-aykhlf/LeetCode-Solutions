@@ -1,12 +1,14 @@
 class Solution:
     def longestStrChain(self, words: List[str]) -> int:
         words.sort(key=len)
-        preds = collections.defaultdict(int)
-        max_seq = 1
+        chains = defaultdict(int)
+        longest_chain = 0
         for word in words:
-            preds[word] = 1
+            if word in chains:
+                continue
+            chains[word] = 1
             for i, c in enumerate(word):
-                prev = word[:i] + word[i+1:]
-                preds[word] = max(preds[word], preds[prev] + 1)
-            max_seq = max(max_seq, preds[word])
-        return max_seq
+                perm = word[:i] + word[i+1:]
+                chains[word] = max(chains[word], chains[perm] + 1)
+            longest_chain = max(longest_chain, chains[word])
+        return longest_chain
