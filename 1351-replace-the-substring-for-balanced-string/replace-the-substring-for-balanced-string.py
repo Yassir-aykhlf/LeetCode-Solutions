@@ -1,23 +1,24 @@
 class Solution:
     def balancedString(self, s: str) -> int:
-        n = len(s)
-        k = n // 4
-        window = collections.defaultdict(int)
-        target = collections.Counter(s)
-        excess = {char: count - k for char, count in target.items() if count > k}
-        if not excess:
+        freq = collections.Counter(s)
+        k = len(s) / 4
+        target = {char: count - k for char, count in freq.items() if count > k}
+        if not target:
             return 0
-        have, need = 0, len(excess)
-        min_len = float('inf')
+        window = collections.Counter()
+        have, need = 0, len(target)
+        res = float("inf")
         l = 0
-        for r in range(n):
+        for r in range(len(s)):
             window[s[r]] += 1
-            if s[r] in excess and window[s[r]] == excess[s[r]]:
+            if s[r] in target and target[s[r]] == window[s[r]]:
                 have += 1
             while have == need:
-                min_len = min(min_len, r - l + 1)
-                if s[l] in excess and window[s[l]] == excess[s[l]]:
+                res = min(res, r - l + 1)
+                if s[l] in target and target[s[l]] == window[s[l]]:
                     have -= 1
                 window[s[l]] -= 1
+                if window[s[l]] == 0:
+                    del window[s[l]]
                 l += 1
-        return min_len if min_len != float('inf') else 0
+        return res if res != float("inf") else 0
