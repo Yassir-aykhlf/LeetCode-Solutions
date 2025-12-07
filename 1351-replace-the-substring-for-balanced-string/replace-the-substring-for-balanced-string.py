@@ -1,24 +1,23 @@
 class Solution:
     def balancedString(self, s: str) -> int:
+        n = len(s)
+        k = n // 4
+        window = collections.defaultdict(int)
         freq = collections.Counter(s)
-        k = len(s) / 4
         target = {char: count - k for char, count in freq.items() if count > k}
         if not target:
             return 0
-        window = collections.Counter()
         have, need = 0, len(target)
-        res = float("inf")
+        min_len = float("inf")
         l = 0
-        for r in range(len(s)):
+        for r in range(n):
             window[s[r]] += 1
             if s[r] in target and target[s[r]] == window[s[r]]:
                 have += 1
-            while have == need:
-                res = min(res, r - l + 1)
+            while need == have:
+                min_len = min(min_len, r - l + 1)
                 if s[l] in target and target[s[l]] == window[s[l]]:
                     have -= 1
                 window[s[l]] -= 1
-                if window[s[l]] == 0:
-                    del window[s[l]]
                 l += 1
-        return res if res != float("inf") else 0
+        return min_len if min_len != float("inf") else 0
