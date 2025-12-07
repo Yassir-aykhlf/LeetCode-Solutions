@@ -20,5 +20,7 @@ struct ListNode* removeNthFromEnd(struct ListNode* head, int n) {
     struct ListNode *to_delete = slow->next;
     slow->next = slow->next->next;
     free(to_delete);
-    return dummy->next;
+    struct ListNode *result = dummy->next;
+    free(dummy);
+    return result;
 }
