@@ -1,7 +1,7 @@
 class Solution:
     def balancedString(self, s: str) -> int:
         n = len(s)
-        k = n // 4
+        k = n / 4
         window = collections.defaultdict(int)
         freq = collections.Counter(s)
         target = {char: count - k for char, count in freq.items() if count > k}
@@ -14,7 +14,7 @@ class Solution:
             window[s[r]] += 1
             if s[r] in target and target[s[r]] == window[s[r]]:
                 have += 1
-            while need == have:
+            while have == need:
                 min_len = min(min_len, r - l + 1)
                 if s[l] in target and target[s[l]] == window[s[l]]:
                     have -= 1
