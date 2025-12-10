@@ -4,13 +4,11 @@ class Solution:
         chars = list(pattern)
         if len(chars) != len(words):
             return False
-        char_word = {}
-        word_char = {}
-        for char, word in zip(chars, words):
-            if char in char_word and char_word[char] != word:
+        w_c = {}
+        c_w = {}
+        for c, w in zip(chars, words):
+            if (c in c_w and c_w[c] != w) or (w in w_c and w_c[w] != c):
                 return False
-            if word in word_char and word_char[word] != char:
-                return False
-            char_word[char] = word
-            word_char[word] = char
+            w_c[w] = c
+            c_w[c] = w
         return True
