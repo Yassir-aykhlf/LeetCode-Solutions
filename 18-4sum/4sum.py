@@ -1,8 +1,8 @@
 class Solution:
     def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
         nums.sort()
-        res = []
         n = len(nums)
+        res = []
         for i in range(n - 3):
             if i > 0 and nums[i] == nums[i - 1]:
                 continue
