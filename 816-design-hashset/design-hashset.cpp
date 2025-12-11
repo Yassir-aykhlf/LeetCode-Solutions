@@ -11,9 +11,11 @@ public:
     
     void add(int key) {
         auto &chain = buckets[hash(key)];
-        // for (auto element : chain) {
-
-        // }
+        for (auto element : chain) {
+            if (element == key) {
+                return;
+            }            
+        }
         chain.push_front(key);
     }
     
