@@ -3,14 +3,13 @@ class Solution:
         nums.sort()
         n = len(nums)
         count = 0
-        for f in range(n - 1, 1, -1):
-            a = 0
-            b = f - 1
-            while a < b:
-                res = nums[a] + nums[b]
-                if res > nums[f]:
-                    count += b - a
-                    b -= 1
+        for i in range(n - 1, - 1, -1):
+            l = 0
+            r = i - 1
+            while l < r:
+                if nums[l] + nums[r] > nums[i]:
+                    count += r - l
+                    r -= 1
                 else:
-                    a += 1
+                    l += 1
         return count
