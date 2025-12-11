@@ -1,12 +1,12 @@
 class Solution:
     def findMaxLength(self, nums: List[int]) -> int:
-        prefix_sums = {0: -1}
+        curr = 0
         max_len = 0
-        cur_sum = 0
+        prefix = {0: -1}
         for i, num in enumerate(nums):
-            cur_sum += 1 if num == 1 else -1
-            if cur_sum in prefix_sums:
-                max_len = max(max_len, i - prefix_sums[cur_sum])
+            curr += 1 if num else -1
+            if curr in prefix:
+                max_len = max(max_len, i - prefix[curr])
             else:
-                prefix_sums[cur_sum] = i
+                prefix[curr] = i
         return max_len
