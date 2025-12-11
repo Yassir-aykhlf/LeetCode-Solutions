@@ -1,7 +1,7 @@
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
+        window = collections.Counter()
         target = collections.Counter(t)
-        window = collections.defaultdict(int)
         have, need = 0, len(target)
         min_len = float("inf")
         res = (0, 0)
