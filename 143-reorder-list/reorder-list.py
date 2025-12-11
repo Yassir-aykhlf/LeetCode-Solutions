@@ -5,15 +5,12 @@
 #         self.next = next
 class Solution:
     def reorderList(self, head: Optional[ListNode]) -> None:
-        """
-        Do not return anything, modify head in-place instead.
-        """
         slow = fast = head
         while fast and fast.next:
-            fast = fast.next.next
-            slow = slow.next
-        mid = slow
+            fast =fast.next.next
+            slow =slow.next
         prev = None
+        mid = slow
         while mid:
             midNxt = mid.next
             mid.next = prev
