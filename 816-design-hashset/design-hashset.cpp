@@ -1,33 +1,33 @@
 class MyHashSet {
-    const int buckets_size = 997;
-    std::vector<std::list<int>> buckets;
-    int hash(int nbr) {
-        return nbr % buckets_size;
+    const int size = 997;
+    std::vector<std::list<int>> bucket;
+    int hash(int key) {
+        return key % size;
     }
 public:
     MyHashSet() {
-        buckets.resize(buckets_size);
+        bucket.resize(size);   
     }
     
     void add(int key) {
-        auto &chain = buckets[hash(key)];
-        for (auto element : chain) {
-            if (element == key) {
+        auto &chain = bucket[hash(key)];
+        for (auto el : chain) {
+            if (el == key) {
                 return;
-            }            
+            }
         }
-        chain.push_front(key);
+        chain.push_back(key);
     }
     
     void remove(int key) {
-        auto &chain = buckets[hash(key)];
+        auto &chain = bucket[hash(key)];
         chain.remove(key);
     }
     
     bool contains(int key) {
-        auto &chain = buckets[hash(key)];
-        for (int element : chain) {
-            if (element == key) {
+        auto &chain = bucket[hash(key)];
+        for (auto el : chain) {
+            if (el == key) {
                 return true;
             }
         }
