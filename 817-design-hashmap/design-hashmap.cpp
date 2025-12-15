@@ -1,5 +1,5 @@
 class MyHashMap {
-    const int size = 997;
+    int size = 997;
     std::vector<std::list<std::pair<int, int>>> bucket;
     int hash(int key) {
         return key % size;
@@ -8,7 +8,6 @@ public:
     MyHashMap() {
         bucket.resize(size);
     }
-    
     void put(int key, int value) {
         auto &chain = bucket[hash(key)];
         for (auto &el : chain) {
