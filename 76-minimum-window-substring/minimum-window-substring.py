@@ -1,12 +1,13 @@
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
-        window = collections.Counter()
+        n, k = len(s), len(t)
         target = collections.Counter(t)
+        window = collections.Counter()
         have, need = 0, len(target)
         min_len = float("inf")
         res = (0, 0)
         l = 0
-        for r in range(len(s)):
+        for r in range(n):
             window[s[r]] += 1
             if s[r] in target and target[s[r]] == window[s[r]]:
                 have += 1
