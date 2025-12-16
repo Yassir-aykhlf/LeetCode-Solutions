@@ -1,12 +1,12 @@
 class Solution:
     def groupThePeople(self, groupSizes: List[int]) -> List[List[int]]:
-        bucket = defaultdict(list)
+        groups = collections.defaultdict(list)
         res = []
-        for id_, size_ in enumerate(groupSizes):
-            if len(bucket[size_]) >= size_:
-                res.append(bucket[size_])
-                bucket[size_] = []
-            bucket[size_].append(id_)
-        for g in bucket.values():
+        for _id, _size in enumerate(groupSizes):
+            if len(groups[_size]) == _size:
+                res.append(groups[_size])
+                groups[_size] = []
+            groups[_size].append(_id)
+        for g in groups.values():
             res.append(g)
         return res
