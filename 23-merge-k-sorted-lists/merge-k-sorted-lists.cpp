@@ -11,8 +11,8 @@
 class Solution {
 public:
     ListNode* mergeTwo(ListNode* l1, ListNode* l2) {
-        ListNode* dummy = new ListNode();
-        ListNode* cur = dummy;
+        ListNode dummy;
+        ListNode* cur = &dummy;
         while (l1 && l2) {
             if (l1->val < l2->val) {
                 cur->next = l1;
@@ -25,10 +25,10 @@ public:
             cur = cur->next;
         }
         cur->next = l1 ? l1 : l2;
-        return dummy->next;
+        return dummy.next;
     }
     ListNode* mergeKLists(vector<ListNode*>& lists) {
-        if (!lists.size()) {
+        if (lists.empty()) {
             return nullptr;
         }
         while (lists.size() > 1) {
