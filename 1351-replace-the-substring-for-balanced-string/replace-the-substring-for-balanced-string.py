@@ -1,12 +1,12 @@
 class Solution:
     def balancedString(self, s: str) -> int:
         n = len(s)
-        k = n / 4
-        window = collections.defaultdict(int)
-        freq = collections.Counter(s)
+        k = n // 4
+        freq = Counter(s)
         target = {char: count - k for char, count in freq.items() if count > k}
         if not target:
             return 0
+        window = Counter()
         have, need = 0, len(target)
         min_len = float("inf")
         l = 0
