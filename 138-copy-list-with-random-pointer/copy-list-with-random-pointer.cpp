@@ -1,36 +1,34 @@
-/*
-// Definition for a Node.
-class Node {
-public:
-    int val;
-    Node* next;
-    Node* random;
+// class Node {
+// public:
+//     int val;
+//     Node* next;
+//     Node* random;
     
-    Node(int _val) {
-        val = _val;
-        next = NULL;
-        random = NULL;
-    }
-};
-*/
+//     Node(int _val) {
+//         val = _val;
+//         next = NULL;
+//         random = NULL;
+//     }
+// };
 
 class Solution {
 public:
     Node* copyRandomList(Node* head) {
-        std::unordered_map<Node*, Node*> cur_copy;
-        Node* cur = head;
-        while (cur) {
-            Node* node = new Node(cur->val);
-            cur_copy[cur] = node;
-            cur = cur->next;
+        if (!head)
+            return nullptr;
+        std::unordered_map<Node*, Node*> old_new;
+        old_new[nullptr] = nullptr;
+        Node *curr = head;
+        while (curr) {
+            old_new[curr] = new Node(curr->val);
+            curr = curr->next;
         }
-        cur = head;
-        while (cur) {
-            Node* node = cur_copy[cur];
-            node->next = cur_copy[cur->next];
-            node->random = cur_copy[cur->random];
-            cur = cur->next;
+        curr = head;
+        while (curr) {
+            old_new[curr]->next = old_new[curr->next];
+            old_new[curr]->random = old_new[curr->random];
+            curr = curr->next;
         }
-        return cur_copy[head];
+        return old_new[head];
     }
 };
