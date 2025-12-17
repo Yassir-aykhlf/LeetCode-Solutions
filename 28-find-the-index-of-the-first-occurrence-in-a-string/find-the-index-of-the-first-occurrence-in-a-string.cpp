@@ -34,8 +34,10 @@ public:
             return 0;
         }
         for (int i = 1; i < n - m + 1; ++i) {
-            h_hash = ((h_hash - haystack[i - 1] * highest_pow % mod + mod) * base + haystack[i + m - 1]) % mod;
-            if (h_hash == n_hash) {
+            long long remove = haystack[i - 1] * highest_pow % mod;
+            long long add = haystack[i + m - 1] % mod;
+            h_hash = ((h_hash - remove + mod) * base + add) % mod;
+            if (h_hash == n_hash && haystack.substr(i, m) == needle) {
                 return i;
             }
         }
