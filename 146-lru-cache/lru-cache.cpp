@@ -1,5 +1,4 @@
 class LRUCache {
-private:
     const int capacity;
     std::list<std::pair<int, int>> cacheList;
     std::unordered_map<int, std::list<std::pair<int, int>>::iterator> cacheMap;
@@ -12,18 +11,20 @@ public:
     int get(int key) {
         if (cacheMap.find(key) != cacheMap.end()) {
             cacheList.splice(cacheList.begin(), cacheList, cacheMap[key]);
-            return cacheMap[key]->second;
+            cacheMap[key] = cacheList.begin();
+            return cacheList.begin()->second;
         }
         return -1;
     }
     
     void put(int key, int value) {
         if (cacheMap.find(key) != cacheMap.end()) {
-            cacheMap[key]->second = value;
             cacheList.splice(cacheList.begin(), cacheList, cacheMap[key]);
+            cacheMap[key] = cacheList.begin();
+            cacheList.begin()->second = value;
             return;
         }
-        if (capacity == cacheList.size()) {
+        if (cacheList.size() == capacity) {
             int del = cacheList.back().first;
             cacheList.pop_back();
             cacheMap.erase(del);
@@ -32,3 +33,10 @@ public:
         cacheMap[key] = cacheList.begin();
     }
 };
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache* obj = new LRUCache(capacity);
+ * int param_1 = obj->get(key);
+ * obj->put(key,value);
+ */
