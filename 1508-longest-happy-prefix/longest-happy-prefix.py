@@ -3,15 +3,12 @@ class Solution:
         mod = 10**9 + 7
         base = 31
         power = 1
-        prefix_hash = 0
-        suffix_hash = 0
-        longest_index = 0
+        res = 0
+        r_hash, l_hash = 0, 0
         for i in range(len(s) - 1):
-            p_old = ord(s[i]) - ord('a') + 1
-            prefix_hash = (prefix_hash * base + p_old) % mod
-            s_old = ord(s[len(s) - 1 - i]) - ord('a') + 1
-            suffix_hash = (suffix_hash + s_old * power) % mod
-            power = (power *base) % mod
-            if prefix_hash == suffix_hash:
-                longest_index = i + 1
-        return s[:longest_index]
+            r_hash = (r_hash * base + ord(s[i])) % mod
+            l_hash = (l_hash + ord(s[len(s) - 1 - i]) * power) % mod
+            power = (power * base) % mod
+            if r_hash == l_hash:
+                res = i + 1
+        return s[:res] if res else ""
