@@ -10,29 +10,29 @@
  */
 class Solution {
 public:
-    ListNode* mergeTwo(ListNode* l1, ListNode* l2) {
-        ListNode dummy;
-        ListNode* cur = &dummy;
-        while (l1 && l2) {
+    ListNode* mergeTwo(ListNode*l1, ListNode*l2) {
+        ListNode* dummy = new ListNode(-1);
+        ListNode* curr = dummy;
+        while (curr && l1 && l2) {
             if (l1->val < l2->val) {
-                cur->next = l1;
+                curr->next = l1;
                 l1 = l1->next;
             }
             else {
-                cur->next = l2;
+                curr->next = l2;
                 l2 = l2->next;
             }
-            cur = cur->next;
+            curr = curr->next;
         }
-        cur->next = l1 ? l1 : l2;
-        return dummy.next;
+        curr->next = l1 ? l1 : l2;
+        return dummy->next;
     }
     ListNode* mergeKLists(vector<ListNode*>& lists) {
         if (lists.empty()) {
             return nullptr;
         }
         while (lists.size() > 1) {
-            std::vector<ListNode*> merged;
+            vector<ListNode*> merged;
             for (int i = 0; i < lists.size(); i += 2) {
                 ListNode* l1 = lists[i];
                 ListNode* l2 = i + 1 < lists.size() ? lists[i + 1] : nullptr;
