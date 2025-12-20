@@ -15,9 +15,9 @@ class Solution:
         def dfs(node):
             if node in visited:
                 return visited[node]
-            copy = Node(node.val)
-            visited[node] = copy
+            clone = Node(node.val)
+            visited[node] = clone
             for nei in node.neighbors:
-                copy.neighbors.append(dfs(nei))
-            return copy
+                clone.neighbors.append(dfs(nei))
+            return clone
         return dfs(node)
