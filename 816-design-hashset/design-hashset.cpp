@@ -1,6 +1,6 @@
 class MyHashSet {
 private:
-    int size = 113;
+    const int size = 997;
     std::vector<std::list<int>> bucket;
     int hash(int key) {
         return key % size;
@@ -12,7 +12,7 @@ public:
     
     void add(int key) {
         auto &chain = bucket[hash(key)];
-        for (auto &el : chain) {
+        for (auto el : chain) {
             if (el == key) {
                 return;
             }
@@ -22,12 +22,17 @@ public:
     
     void remove(int key) {
         auto &chain = bucket[hash(key)];
-        chain.remove(key);
+        for (auto itr = chain.begin(); itr != chain.end(); ++itr) {
+            if (*itr == key) {
+                chain.erase(itr);
+                return;
+            }
+        }
     }
     
     bool contains(int key) {
         auto &chain = bucket[hash(key)];
-        for (auto &el : chain) {
+        for (auto el : chain) {
             if (el == key) {
                 return true;
             }
@@ -35,3 +40,11 @@ public:
         return false;
     }
 };
+
+/**
+ * Your MyHashSet object will be instantiated and called as such:
+ * MyHashSet* obj = new MyHashSet();
+ * obj->add(key);
+ * obj->remove(key);
+ * bool param_3 = obj->contains(key);
+ */
