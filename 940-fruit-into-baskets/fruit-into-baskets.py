@@ -1,7 +1,7 @@
 class Solution:
     def totalFruit(self, fruits: List[int]) -> int:
-        baskets = collections.defaultdict(int)
         max_len = 0
+        baskets = defaultdict(int)
         l = 0
         for r in range(len(fruits)):
             baskets[fruits[r]] += 1
