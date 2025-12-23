@@ -1,7 +1,7 @@
 class Solution:
     def subarraysWithKDistinct(self, nums: List[int], k: int) -> int:
         def atMostK(k):
-            freq = collections.Counter()
+            freq = defaultdict(int)
             max_len = 0
             l = 0
             total = 0
