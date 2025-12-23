@@ -1,15 +1,18 @@
 class Solution:
     def minOperations(self, nums: List[int], x: int) -> int:
-        if sum(nums) < x: return -1
-        target = sum(nums) - x
+        total_sum = sum(nums)
+        target = total_sum - x
         min_len = float("inf")
         n = len(nums)
+        if target == 0:
+            return n
+        if target < 0:
+            return -1
         curr = 0
         l = 0
         for r in range(len(nums)):
             curr += nums[r]
             while curr > target:
-                print(curr)
                 curr -= nums[l]
                 l += 1
             if curr == target:
