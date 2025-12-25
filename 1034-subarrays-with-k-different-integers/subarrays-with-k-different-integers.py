@@ -2,9 +2,8 @@ class Solution:
     def subarraysWithKDistinct(self, nums: List[int], k: int) -> int:
         def atMostK(k):
             freq = defaultdict(int)
-            max_len = 0
+            count = 0
             l = 0
-            total = 0
             for r in range(len(nums)):
                 freq[nums[r]] += 1
                 while len(freq) > k:
@@ -12,6 +11,6 @@ class Solution:
                     if freq[nums[l]] == 0:
                         del freq[nums[l]]
                     l += 1
-                total += r - l + 1
-            return total
+                count += r - l + 1
+            return count
         return atMostK(k) - atMostK(k - 1)
