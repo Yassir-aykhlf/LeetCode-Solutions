@@ -7,6 +7,6 @@ public:
         for (size_t i = 0; i < s.size() - k + 1; ++i) {
             seen.insert(s.substr(i, k));
         }
-        return seen.size() == (unsigned int)std::pow(2, k);
+        return seen.size() == (1 << k);
     }
 };
