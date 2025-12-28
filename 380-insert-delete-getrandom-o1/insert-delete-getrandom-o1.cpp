@@ -4,7 +4,6 @@ private:
     std::unordered_map<int, int> val_idx;
 public:
     RandomizedSet() {
-        std::srand(std::time(0));
     }
     
     bool insert(int val) {
@@ -20,11 +19,11 @@ public:
         if (val_idx.find(val) == val_idx.end()) {
             return false;
         }
-        int del = val_idx[val];
-        int last = vals.back();
-        vals[del] = last;
-        val_idx[last] = del;
+        int del_idx = val_idx[val];
+        int last_val = vals.back();
+        vals[del_idx] = last_val;
         vals.pop_back();
+        val_idx[last_val] = del_idx;
         val_idx.erase(val);
         return true;
     }
@@ -33,3 +32,8 @@ public:
         return vals[std::rand() % vals.size()];
     }
 };
+
+/**
+["RandomizedSet","insert","remove","insert","getRandom","remove","insert","getRandom"]
+[[],[1],[2],[2],[],[1],[2],[]]
+ */
