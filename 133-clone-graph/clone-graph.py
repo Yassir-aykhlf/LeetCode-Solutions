@@ -1,3 +1,5 @@
+from typing import Optional
+
 """
 # Definition for a Node.
 class Node:
@@ -5,8 +7,6 @@ class Node:
         self.val = val
         self.neighbors = neighbors if neighbors is not None else []
 """
-
-from typing import Optional
 class Solution:
     def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
         if not node:
@@ -21,3 +21,4 @@ class Solution:
                 clone.neighbors.append(dfs(nei))
             return clone
         return dfs(node)
+        
