@@ -1,31 +1,29 @@
 class MinStack {
 private:
-    std::list<int> _min;
-    std::deque<int> c;
+    std::stack<int> _stk;
+    std::stack<int> _min;
 public:
-    MinStack() {
-        
-    }
+    MinStack() {}
     
     void push(int val) {
-        if (_min.empty() || _min.back() >= val) {
-            _min.push_back(val);
+        if (_min.empty() || _min.top() >= val) {
+            _min.push(val);
         }
-        c.push_back(val);
+        _stk.push(val);
     }
     
     void pop() {
-        if (!_min.empty() && c.back() == _min.back()) {
-            _min.pop_back();
+        if (_min.top() == _stk.top()) {
+            _min.pop();
         }
-        c.pop_back();
+        _stk.pop();
     }
     
     int top() {
-        return c.back();
+        return _stk.top();
     }
     
     int getMin() {
-        return _min.back();
+        return _min.top();
     }
 };
