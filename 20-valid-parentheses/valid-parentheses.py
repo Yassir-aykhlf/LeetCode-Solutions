@@ -1,20 +1,16 @@
 class Solution:
     def isValid(self, s: str) -> bool:
-        if len(s) < 2:
-            return False
         stack = []
-        opening = set("({[")
-        closing = set(")}]")
         mapping = {
             ")": "(",
             "}": "{",
             "]": "["
         }
         for c in s:
-            if c in opening:
-                stack.append(c)
-            elif stack and stack[-1] == mapping[c]:
+            if c in mapping:
+                if not stack or stack[-1] != mapping[c]:
+                    return False
                 stack.pop()
             else:
-                return False
+                stack.append(c)
         return len(stack) == 0
