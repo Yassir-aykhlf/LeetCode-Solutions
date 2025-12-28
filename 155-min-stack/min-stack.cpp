@@ -5,7 +5,7 @@ public:
     MinStack() {}
     
     void push(int val) {
-        _stk.push({val, _stk.empty() ? val : std::min(val, _stk.top().second)});
+        _stk.emplace(val, _stk.empty() ? val : std::min(val, _stk.top().second));
     }
     
     void pop() {
