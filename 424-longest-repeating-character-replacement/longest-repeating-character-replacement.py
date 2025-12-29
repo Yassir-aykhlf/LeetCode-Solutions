@@ -1,7 +1,8 @@
 class Solution:
     def characterReplacement(self, s: str, k: int) -> int:
-        freq = collections.defaultdict(int)
-        l, max_len = 0, 0
+        freq = defaultdict(int)
+        max_len = 0
+        l = 0
         for r in range(len(s)):
             freq[s[r]] += 1
             while r - l + 1 - max(freq.values()) > k:
