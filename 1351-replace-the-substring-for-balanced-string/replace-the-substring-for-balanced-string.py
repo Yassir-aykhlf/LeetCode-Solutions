@@ -1,22 +1,22 @@
 class Solution:
     def balancedString(self, s: str) -> int:
+        min_len = float("inf")
         n = len(s)
         k = n // 4
+        window = defaultdict(int)
         freq = Counter(s)
-        target = {char: count - k for char, count in freq.items() if count > k}
-        if not target:
+        excess = {char: count - k for char, count in freq.items() if count > k}
+        if not excess:
             return 0
-        window = Counter()
-        have, need = 0, len(target)
-        min_len = float("inf")
+        have, need = 0, len(excess)
         l = 0
         for r in range(n):
             window[s[r]] += 1
-            if s[r] in target and target[s[r]] == window[s[r]]:
+            if s[r] in excess and excess[s[r]] == window[s[r]]:
                 have += 1
             while have == need:
                 min_len = min(min_len, r - l + 1)
-                if s[l] in target and target[s[l]] == window[s[l]]:
+                if s[l] in excess and excess[s[l]] == window[s[l]]:
                     have -= 1
                 window[s[l]] -= 1
                 l += 1
