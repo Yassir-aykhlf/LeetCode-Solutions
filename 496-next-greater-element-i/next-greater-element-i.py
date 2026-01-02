@@ -3,7 +3,7 @@ class Solution:
         stack = []
         mapping = {}
         for num in nums2:
-            while stack and stack[-1] < num:
+            while stack and num > stack[-1]:
                 mapping[stack.pop()] = num
             stack.append(num)
         return [mapping.get(x, -1) for x in nums1]
