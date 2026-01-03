@@ -2,19 +2,20 @@ class Solution:
     def calculate(self, s: str) -> int:
         stack = []
         num = 0
-        sign = '+'
-        for i, c in enumerate(s):
+        prev_op = '+'
+        s += '+'
+        for c in s:
             if c.isdigit():
                 num = num * 10 + int(c)
-            if c in "+-*/" or i == len(s) - 1:
-                if sign == '+':
+            elif c in "-+*/":
+                if prev_op == '+':
                     stack.append(num)
-                elif sign == '-':
+                elif prev_op == '-':
                     stack.append(-num)
-                elif sign == '*':
+                elif prev_op == '*':
                     stack.append(stack.pop() * num)
-                elif sign == '/':
+                elif prev_op == '/':
                     stack.append(int(stack.pop() / num))
-                sign = c
                 num = 0
+                prev_op = c
         return sum(stack)
