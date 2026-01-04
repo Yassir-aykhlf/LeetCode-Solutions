@@ -1,7 +1,7 @@
 class Solution:
     def decodeString(self, s: str) -> str:
-        string = ""
         stack = []
+        string = ""
         num = 0
         for c in s:
             if c.isdigit():
@@ -14,7 +14,8 @@ class Solution:
                 string = ""
                 num = 0
             elif c == ']':
-                count = stack.pop()
-                segm = stack.pop()
-                string = segm + count * string
+                prev_num = stack.pop()
+                prev_str = stack.pop()
+                string = prev_str + prev_num * string
+                num = 0
         return string
