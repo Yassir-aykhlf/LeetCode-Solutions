@@ -2,20 +2,20 @@ class Solution:
     def calculate(self, s: str) -> int:
         stack = []
         num = 0
-        prev_op = '+'
+        last_sign = '+'
         s += '+'
         for c in s:
             if c.isdigit():
                 num = num * 10 + int(c)
-            elif c in "-+*/":
-                if prev_op == '+':
+            elif c in "+-*/":
+                if last_sign == '+':
                     stack.append(num)
-                elif prev_op == '-':
+                if last_sign == '-':
                     stack.append(-num)
-                elif prev_op == '*':
+                elif last_sign == '*':
                     stack.append(stack.pop() * num)
-                elif prev_op == '/':
+                elif last_sign == '/':
                     stack.append(int(stack.pop() / num))
+                last_sign = c
                 num = 0
-                prev_op = c
         return sum(stack)
