@@ -17,5 +17,4 @@ class Solution:
                 prev_num = stack.pop()
                 prev_str = stack.pop()
                 string = prev_str + prev_num * string
-                num = 0
         return string
