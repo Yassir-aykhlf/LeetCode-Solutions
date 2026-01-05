@@ -1,4 +1,5 @@
 class MyHashMap {
+private:
     int capacity = 997;
     std::vector<std::list<std::pair<int,int>>> bucket;
     int hash(int key) {
