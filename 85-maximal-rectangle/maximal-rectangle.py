@@ -1,19 +1,19 @@
 class Solution:
-    def maxHistogram(self, arr):
+    def maxRec(self, cols):
         stack = []
         max_area = 0
-        for i, h in enumerate(arr):
+        for i, h in enumerate(cols):
             start = i
             while stack and stack[-1][1] > h:
-                idx, hi = stack.pop()
-                max_area = max(max_area, hi * (i - idx))
+                idx, hei = stack.pop()
+                max_area = max(max_area, hei * (i - idx))
                 start = idx
             stack.append((start, h))
         for i, h in stack:
-            max_area = max(max_area, h * (len(arr) - i))
+            max_area = max(max_area, h *(len(cols) - i))
         return max_area
     def maximalRectangle(self, matrix: List[List[str]]) -> int:
-        if not matrix or not matrix[0]:
+        if not matrix:
             return 0
         max_area = 0
         n = len(matrix)
@@ -22,5 +22,5 @@ class Solution:
         for row in range(n):
             for col in range(m):
                 cols[col] = cols[col] + 1 if matrix[row][col] == "1" else 0
-            max_area = max(max_area, self.maxHistogram(cols))
+            max_area = max(max_area, self.maxRec(cols))
         return max_area
