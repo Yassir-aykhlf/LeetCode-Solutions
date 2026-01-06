@@ -4,7 +4,7 @@ class Solution:
         mapping = {
             ')': '(',
             '}': '{',
-            ']': '['
+            ']': '[',
         }
         for c in s:
             if c in mapping:
