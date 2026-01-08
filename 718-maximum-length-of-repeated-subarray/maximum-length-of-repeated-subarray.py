@@ -1,40 +1,36 @@
 class Solution:
     def findLength(self, nums1: List[int], nums2: List[int]) -> int:
         def check(n):
-            hash1, hash2 = 0, 0
-            base, mod = 101, 10**9 + 7
-            highest_pow = pow(base, n - 1, mod)
             seen = set()
-            # calc hash of the first window of nums1
+            mod = 10 ** 9 + 7
+            base = 101
+            highest_pow = pow(base, n - 1, mod)
+            h1_hash, h2_hash = 0, 0
             for i in range(n):
-                hash1 = (hash1 * base + nums1[i]) % mod
-            seen.add(hash1)
-            # calc the hashs of the rest of nums1
-            for i in range(1, len(nums1) - n + 1):
-                new = nums1[i + n - 1]
-                old = (nums1[i - 1] * highest_pow) % mod
-                hash1 = ((hash1 - old) * base + new) % mod
-                seen.add(hash1)
-            # calc hash of the first window of nums2
+                h1_hash = (h1_hash * base + nums1[i]) % mod
+            seen.add(h1_hash)
+            for i in range(n, len(nums1)):
+                new = nums1[i]
+                old = nums1[i - n]
+                h1_hash = ((h1_hash - old * highest_pow) * base + new) % mod
+                seen.add(h1_hash)
+            
             for i in range(n):
-                hash2 = (hash2 * base + nums2[i]) % mod
-            if hash2 in seen:
+                h2_hash = (h2_hash * base + nums2[i]) % mod
+            if h2_hash in seen:
                 return True
-            for i in range(1, len(nums2) - n + 1):
-                new = nums2[i + n - 1]
-                old = (nums2[i - 1] * highest_pow) % mod
-                hash2 = ((hash2 - old) * base + new) % mod
-                if hash2 in seen:
+            for i in range(n, len(nums2)):
+                new = nums2[i]
+                old = nums2[i - n]
+                h2_hash = ((h2_hash - old * highest_pow) * base + new) % mod
+                if h2_hash in seen:
                     return True
             return False
-
-        l, r = 0, min(len(nums1), len(nums2))
-        ans = 0
-        while l <= r:
-            mid = (l + r) // 2
-            if check(mid):
-                ans = mid
-                l = mid + 1
+        lo, hi = 0, min(len(nums1), len(nums2))
+        while lo <= hi:
+            n = (lo + hi) // 2
+            if check(n):
+                lo = n + 1
             else:
-                r = mid - 1
-        return ans
+                hi = n - 1
+        return hi
