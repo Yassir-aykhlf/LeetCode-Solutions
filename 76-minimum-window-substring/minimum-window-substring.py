@@ -1,10 +1,10 @@
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
-        res = (0, 0)
         min_len = float("inf")
         target = Counter(t)
         window = defaultdict(int)
         have, need = 0, len(target)
+        res = (0, 0)
         l = 0
         for r in range(len(s)):
             window[s[r]] += 1
