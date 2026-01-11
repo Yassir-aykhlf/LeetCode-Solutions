@@ -7,18 +7,18 @@ class Solution:
     def reorderList(self, head: Optional[ListNode]) -> None:
         slow = fast = head
         while fast and fast.next:
-            fast =fast.next.next
-            slow =slow.next
+            slow = slow.next
+            fast = fast.next.next
+        curr = slow
         prev = None
-        mid = slow
-        while mid:
-            midNxt = mid.next
-            mid.next = prev
-            prev = mid
-            mid = midNxt
-        l, r = head, prev
-        while r.next:
-            l_next, r_next = l.next, r.next
-            l.next = r
-            r.next = l_next
-            l, r = l_next, r_next
+        while curr:
+            curr_next = curr.next
+            curr.next = prev
+            prev = curr
+            curr = curr_next
+        r1, r2 = head, prev
+        while r2.next:
+            r1_next, r2_next = r1.next, r2.next
+            r1.next = r2
+            r2.next = r1_next
+            r1, r2 = r1_next, r2_next
