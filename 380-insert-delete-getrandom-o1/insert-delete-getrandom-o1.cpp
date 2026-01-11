@@ -18,11 +18,11 @@ public:
         if (_val_idx.find(val) == _val_idx.end()) {
             return false;
         }
-        int tar_idx = _val_idx[val];
-        int las_val = _vec.back();
-        _vec[tar_idx] = las_val;
-        _val_idx[las_val] = tar_idx;
+        int last = _vec.back();
+        int idx = _val_idx[val];
+        _vec[idx] = last;
         _vec.pop_back();
+        _val_idx[last] = idx;
         _val_idx.erase(val);
         return true;
     }
