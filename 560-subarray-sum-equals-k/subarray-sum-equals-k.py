@@ -1,12 +1,12 @@
 class Solution:
     def subarraySum(self, nums: List[int], k: int) -> int:
-        prefix = {0: 1}
-        cur_sum = 0
+        _sum_count = {0: 1}
+        curr_sum = 0
         count = 0
-        for r in range(len(nums)):
-            cur_sum += nums[r]
-            prev_slice = cur_sum - k
-            if prev_slice in prefix:
-                count += prefix[prev_slice]
-            prefix[cur_sum] = prefix.get(cur_sum, 0) + 1
+        for num in nums:
+            curr_sum += num
+            target = curr_sum - k
+            if target in _sum_count:
+                count += _sum_count[target]
+            _sum_count[curr_sum] = _sum_count.get(curr_sum, 0) + 1
         return count
