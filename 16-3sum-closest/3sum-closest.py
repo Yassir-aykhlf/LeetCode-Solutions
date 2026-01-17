@@ -1,25 +1,24 @@
 class Solution:
     def threeSumClosest(self, nums: List[int], target: int) -> int:
-        n = len(nums)
         nums.sort()
+        n = len(nums)
         closest = float("inf")
-        res = 0
-        for i in range(n - 2):
+        best = -1
+        for i in range(len(nums)):
             if i > 0 and nums[i] == nums[i - 1]:
                 continue
             l = i + 1
             r = n - 1
             while l < r:
                 comb = nums[i] + nums[l] + nums[r]
-                dist = abs(target - comb)
-                if dist < closest:
-                    closest = dist
-                    res = comb
+                dest = abs(target - comb)
+                if dest < closest:
+                    closest = dest
+                    best = comb
                 if comb == target:
-                    return comb 
+                    return target
                 elif comb < target:
                     l += 1
                 else:
                     r -= 1
-        return res
-                
+        return best
