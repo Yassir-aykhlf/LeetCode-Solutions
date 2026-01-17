@@ -1,22 +1,22 @@
 class Solution:
-    def maxRec(self, heights: List) -> int:
-        res = 0
-        stack = []
-        for i, h in enumerate(heights):
-            start = i
-            while stack and stack[-1][1] > h:
-                idx, hi = stack.pop()
-                res = max(res, hi * (i - idx))
-                start = idx
-            stack.append((start, h))
-        for i, h in stack:
-            res = max(res, h * (len(heights) - i))
-        return res
-    def maximalRectangle(self, matrix: List[List[str]]) -> int:
+    def maxRec(self, nums: List[int]) -> int:
         max_area = 0
+        stack = []
+        for i, num in enumerate(nums):
+            start = i
+            while stack and stack[-1][1] > num:
+                idx, pre = stack.pop()
+                max_area = max(max_area, pre * (i - idx))
+                start = idx
+            stack.append((start, num))
+        for i, num in stack:
+            max_area = max(max_area, num * (len(nums) - i))
+        return max_area
+    def maximalRectangle(self, matrix: List[List[str]]) -> int:
         n = len(matrix)
         m = len(matrix[0])
         cols = [0] * m
+        max_area = 0
         for row in range(n):
             for col in range(m):
                 cols[col] = cols[col] + 1 if matrix[row][col] == "1" else 0
