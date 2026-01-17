@@ -1,8 +1,8 @@
 class Solution:
     def searchRange(self, nums: List[int], target: int) -> List[int]:
         def findBound(isFirst: bool) -> int:
-            bound = -1
             lo, hi = 0, len(nums) - 1
+            bound = -1
             while lo <= hi:
                 mid = (lo + hi) // 2
                 if nums[mid] == target:
