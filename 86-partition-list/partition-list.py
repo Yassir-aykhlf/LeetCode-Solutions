@@ -5,9 +5,9 @@
 #         self.next = next
 class Solution:
     def partition(self, head: Optional[ListNode], x: int) -> Optional[ListNode]:
-        g_head = ListNode(-1)
+        g_head = ListNode(-1, head)
         g = g_head
-        s_head = ListNode(-1)
+        s_head = ListNode(-1, head)
         s = s_head
         curr = head
         while curr:
