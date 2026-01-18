@@ -1,15 +1,15 @@
 class Solution:
     def numSubarraysWithSum(self, nums: List[int], goal: int) -> int:
-        def atMost(k):
-            if k < 0:
+        def atMost(goal):
+            if goal < 0:
                 return 0
+            curr_sum = 0
             count = 0
-            curr = 0
             l = 0
             for r in range(len(nums)):
-                curr += nums[r]
-                while curr > k:
-                    curr -= nums[l]
+                curr_sum += nums[r]
+                while curr_sum > goal:
+                    curr_sum -= nums[l]
                     l += 1
                 count += r - l + 1
             return count
