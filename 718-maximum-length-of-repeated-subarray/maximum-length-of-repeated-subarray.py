@@ -1,37 +1,32 @@
 class Solution:
     def findLength(self, nums1: List[int], nums2: List[int]) -> int:
-        def check(n):
-            seen = set()
+        def search(n):
             base = 101
             mod = 10 ** 9 + 7
             highest_pow = pow(base, n - 1, mod)
-            hash1 = 0
-            hash2 = 0
+            seen = set()
+            nums1_hash = 0
+            nums2_hash = 0
             for i in range(n):
-                hash1 = (hash1 * base + nums1[i]) % mod
-            seen.add(hash1)
+                nums1_hash = (nums1_hash * base + nums1[i]) % mod
+            seen.add(nums1_hash)
             for i in range(n, len(nums1)):
-                new = nums1[i]
-                old = nums1[i - n]
-                hash1 = ((hash1 - old * highest_pow) * base + new) % mod
-                seen.add(hash1)
+                nums1_hash = ((nums1_hash - nums1[i - n] * highest_pow) * base + nums1[i]) % mod
+                seen.add(nums1_hash)
             for i in range(n):
-                hash2 = (hash2 * base + nums2[i]) % mod
-            if hash2 in seen:
+                nums2_hash = (nums2_hash * base + nums2[i]) % mod
+            if nums2_hash in seen:
                 return True
             for i in range(n, len(nums2)):
-                new = nums2[i]
-                old = nums2[i - n]
-                hash2 = ((hash2 - old * highest_pow) * base + new) % mod
-                if hash2 in seen:
+                nums2_hash = ((nums2_hash - nums2[i - n] * highest_pow) * base + nums2[i]) % mod
+                if nums2_hash in seen:
                     return True
             return False
-
         lo, hi = 0, min(len(nums1), len(nums2))
         while lo <= hi:
-            n = (lo + hi) // 2
-            if check(n):
-                lo = n + 1
+            mid = (lo + hi) // 2
+            if search(mid):
+                lo = mid + 1
             else:
-                hi = n - 1
+                hi = mid - 1
         return hi
