@@ -4,13 +4,12 @@ class Solution:
         mapping = {
             ')': '(',
             '}': '{',
-            ']': '[',
+            ']': '['
         }
         for c in s:
             if c in mapping:
-                if not stack or stack[-1] != mapping[c]:
-                    return False
-                stack.pop()
-            else:
-                stack.append(c)
+                if stack and stack[-1] == mapping[c]:
+                    stack.pop()
+                    continue
+            stack.append(c)
         return not stack
