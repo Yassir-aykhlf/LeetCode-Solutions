@@ -1,6 +1,6 @@
 class Solution:
     def searchRange(self, nums: List[int], target: int) -> List[int]:
-        def findBound(isFirst: bool) -> int:
+        def findBound(isFirst):
             lo, hi = 0, len(nums) - 1
             bound = -1
             while lo <= hi:
