@@ -22,7 +22,7 @@ public:
             cachelist.begin()->second = value;
             return;
         }
-        if (capacity == cachelist.size()) {
+        if (cachelist.size() == capacity) {
             int del_key = cachelist.back().first;
             cachelist.pop_back();
             cachemap.erase(del_key);
