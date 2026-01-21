@@ -2,10 +2,10 @@ class Solution:
     def find132pattern(self, nums: List[int]) -> bool:
         stack = []
         third = float("-inf")
-        for n in reversed(nums):
-            if n < third:
+        for num in reversed(nums):
+            if num < third:
                 return True
-            while stack and stack[-1] < n:
+            while stack and stack[-1] < num:
                 third = stack.pop()
-            stack.append(n)
+            stack.append(num)
         return False
