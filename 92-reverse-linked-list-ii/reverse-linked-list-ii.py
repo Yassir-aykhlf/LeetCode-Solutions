@@ -5,6 +5,8 @@
 #         self.next = next
 class Solution:
     def reverseBetween(self, head: Optional[ListNode], left: int, right: int) -> Optional[ListNode]:
+        if not head or not head.next:
+            return head
         dummy = ListNode(-1, head)
         prev = dummy
         for _ in range(left - 1):
