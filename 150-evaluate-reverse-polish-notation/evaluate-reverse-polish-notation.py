@@ -14,4 +14,4 @@ class Solution:
                 stack.append(int(a / b))
             else:
                 stack.append(int(t))
-        return sum(stack)
+        return stack[-1]
