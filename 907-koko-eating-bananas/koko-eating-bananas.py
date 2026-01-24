@@ -1,16 +1,18 @@
 class Solution:
     def minEatingSpeed(self, piles: List[int], h: int) -> int:
-        def check(k):
-            hours_need = 0
-            for p in piles:
-                hours_need += math.ceil(p / k)
-            return hours_need <= h
         lo, hi = 1, max(piles)
+        def check(hourly_rate):
+            hours_taken = 0
+            for p in piles:
+                if p <= hourly_rate:
+                    hours_taken += 1
+                else:
+                    hours_taken += math.ceil(p / hourly_rate)
+            return hours_taken <= h
         while lo <= hi:
-            k = (lo + hi) // 2
-            if check(k):
-                min_k = k
-                hi = k - 1
+            mid = (lo + hi) // 2
+            if check(mid):
+                hi = mid - 1
             else:
-                lo = k + 1
-        return min_k
+                lo = mid + 1
+        return lo
