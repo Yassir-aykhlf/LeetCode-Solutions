@@ -1,21 +1,19 @@
 class Solution:
     def maxDistance(self, position: List[int], m: int) -> int:
         position.sort()
-        def canPlace(force):
+        def check(dist):
             count = 1
-            last_pos = position[0]
+            last_position = position[0]
             for i in range(1, len(position)):
-                if position[i] - last_pos >= force:
+                if position[i] - last_position >= dist:
                     count += 1
-                    last_pos = position[i]
-                    if count == m:
-                        return True
-            return False
+                    last_position = position[i]
+            return count >= m
         lo, hi = 1, position[-1] - position[0]
         ans = hi
         while lo <= hi:
             mid = (lo + hi) // 2
-            if canPlace(mid):
+            if check(mid):
                 ans = mid
                 lo = mid + 1
             else:
