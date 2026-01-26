@@ -1,3 +1,3 @@
 class Solution:
     def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
-        return sorted([item for sub in matrix for item in sub])[k - 1]
+        return sorted([num for arr in matrix for num in arr])[k - 1]
