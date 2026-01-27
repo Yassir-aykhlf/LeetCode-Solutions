@@ -1,9 +1,9 @@
 class Solution:
     def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
         n = len(matrix)
-        low, high = matrix[0][0], matrix[n - 1][n - 1]
-        while low < high:
-            mid = (low + high) // 2
+        lo, hi = matrix[0][0], matrix[n - 1][n - 1]
+        while lo <= hi:
+            mid = (lo + hi) // 2
             row, col = 0, n - 1
             count = 0
             while row < n and col >= 0:
@@ -13,7 +13,7 @@ class Solution:
                 else:
                     col -= 1
             if count >= k:
-                high = mid
+                hi = mid - 1
             else:
-                low = mid + 1
-        return high
+                lo = mid + 1
+        return lo
