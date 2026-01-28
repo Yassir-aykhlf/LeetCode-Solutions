@@ -1,21 +1,21 @@
 class Solution:
     def calculate(self, s: str) -> int:
-        stack = []
-        las_sig = '+'
         s += '+'
+        last_sign = '+'
         num = 0
+        stack = []
         for c in s:
             if c.isdigit():
                 num = num * 10 + int(c)
             elif c in "+-*/":
-                if las_sig == '+':
+                if last_sign == '+':
                     stack.append(num)
-                elif las_sig == '-':
+                elif last_sign == '-':
                     stack.append(-num)
-                elif las_sig == '*':
+                elif last_sign == '*':
                     stack.append(stack.pop() * num)
-                elif las_sig == '/':
+                else:
                     stack.append(int(stack.pop() / num))
+                last_sign = c
                 num = 0
-                las_sig = c
         return sum(stack)
