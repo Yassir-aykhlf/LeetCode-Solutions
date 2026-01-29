@@ -3,8 +3,8 @@ class Solution:
         lo, hi = 0, len(nums) - 1
         while lo < hi:
             mid = (lo + hi) // 2
-            if nums[mid] < nums[mid + 1]:
-                lo = mid + 1
-            else:
+            if nums[mid] > nums[mid + 1]:
                 hi = mid
-        return lo
+            else:
+                lo = mid + 1
+        return hi
