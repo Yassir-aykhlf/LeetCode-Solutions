@@ -1,6 +1,6 @@
 class Solution:
     def longestOnes(self, nums: List[int], k: int) -> int:
-        window = {0: 0, 1:0}
+        window = {0: 0, 1: 0}
         max_len = 0
         l = 0
         for r in range(len(nums)):
