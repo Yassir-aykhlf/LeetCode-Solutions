@@ -1,13 +1,14 @@
 class Solution:
     def shipWithinDays(self, weights: List[int], days: int) -> int:
-        def check(daily_weight):
+        def check(max_capacity):
             days_taken = 1
-            current_sum = 0
+            cur_sum = 0
             for w in weights:
-                if current_sum + w > daily_weight:
+                if cur_sum + w > max_capacity:
                     days_taken += 1
-                    current_sum = 0
-                current_sum += w
+                    cur_sum = w
+                else:
+                    cur_sum += w
             return days_taken <= days
         lo, hi = max(weights), sum(weights)
         while lo < hi:
