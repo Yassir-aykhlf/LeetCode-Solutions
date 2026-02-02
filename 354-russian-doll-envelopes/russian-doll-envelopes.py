@@ -5,7 +5,7 @@ class Solution:
         LIS = []
         for h in heights:
             idx = bisect.bisect_left(LIS, h)
-            if idx >= len(LIS):
+            if idx == len(LIS):
                 LIS.append(h)
             else:
                 LIS[idx] = h
