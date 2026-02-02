@@ -13,7 +13,7 @@ class Solution:
                 old_val = ord(s[i - pot_len]) * highest_pow
                 new_val = ord(s[i]) 
                 hash = ((hash - old_val) * BASE + ord(s[i])) % MOD
-                if hash in seen and s[seen[hash]: seen[hash] + pot_len] == s[i - pot_len + 1: i - pot_len + 1 + pot_len]:
+                if hash in seen and s[seen[hash]: seen[hash] + pot_len] == s[i - pot_len + 1: i + 1]:
                     return i - pot_len + 1
                 seen[hash] = i - pot_len + 1
             return -1
