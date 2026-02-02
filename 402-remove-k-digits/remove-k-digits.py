@@ -6,7 +6,7 @@ class Solution:
                 stack.pop()
                 k -= 1
             stack.append(n)
-        while k:
+        while stack and k:
             stack.pop()
             k -= 1
         res = ''.join(stack).lstrip('0')
