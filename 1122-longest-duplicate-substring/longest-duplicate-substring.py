@@ -1,30 +1,32 @@
 class Solution:
     def longestDupSubstring(self, s: str) -> str:
-        def search(n):
+        def dup_exist(pot_len):
             seen = {}
-            base, mod = 31, 10 ** 9 + 7
-            highest_pow = pow(base, n - 1, mod)
-            hash_ = 0
-            for i in range(n):
-                hash_ = (hash_ * base + ord(s[i])) % mod
-            seen[hash_] = 0
-            for i in range(1, len(s) - n + 1):
-                new = ord(s[i + n - 1])
-                old = ord(s[i - 1])
-                hash_ = ((hash_ - old * highest_pow) * base + new) % mod
-                if hash_ in seen and s[seen[hash_] : seen[hash_] + n] == s[i:i + n]:
-                    return seen[hash_]
-                seen[hash_] = i
+            MOD = 10 ** 9 + 7
+            BASE = 31
+            highest_pow = pow(BASE, pot_len - 1, MOD)
+            hash = 0
+            for i in range(pot_len):
+                hash = (hash * BASE + ord(s[i])) % MOD
+            seen[hash] = 0
+            for i in range(pot_len, len(s)):
+                old_val = ord(s[i - pot_len]) * highest_pow
+                new_val = ord(s[i]) 
+                hash = ((hash - old_val) * BASE + ord(s[i])) % MOD
+                if hash in seen and s[seen[hash]: seen[hash] + pot_len] == s[i - pot_len + 1: i - pot_len + 1 + pot_len]:
+                    return i - pot_len + 1
+                seen[hash] = i - pot_len + 1
             return -1
         lo, hi = 0, len(s)
-        best_i, best_len = -1 , 0
+        best_len = hi
+        best_idx = -1
         while lo <= hi:
-            n = (lo + hi) // 2
-            index = search(n)
-            if index != -1:
-                best_i = index
-                best_len = n
-                lo = n + 1
+            mid = (lo + hi) // 2
+            idx = dup_exist(mid)
+            if idx != -1:
+                best_len = mid
+                best_idx = idx
+                lo = mid + 1
             else:
-                hi = n - 1
-        return s[best_i : best_i + best_len] if best_i != -1 else ""
+                hi = mid - 1
+        return s[best_idx : best_idx + best_len] if best_idx != -1 else ""
