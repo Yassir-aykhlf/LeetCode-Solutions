@@ -1,16 +1,10 @@
 class Solution:
     def lengthOfLIS(self, nums: List[int]) -> int:
-        seq = []
+        LIS = []
         for n in nums:
-            if not seq or n > seq[-1]:
-                seq.append(n)
+            idx = bisect.bisect_left(LIS, n)
+            if idx == len(LIS):
+                LIS.append(n)
             else:
-                lo, hi = 0, len(seq) - 1
-                while lo < hi:
-                    mid = (lo + hi) // 2
-                    if seq[mid] >= n:
-                        hi = mid
-                    else:
-                        lo = mid + 1
-                seq[hi] = n
-        return len(seq)
+                LIS[idx] = n
+        return len(LIS)
