@@ -1,12 +1,12 @@
 class Solution:
     def numberOfSubarrays(self, nums: List[int], k: int) -> int:
-        prefix = {0: 1}
+        sum_count = {0: 1}
+        curr_sum = 0
         count = 0
-        cur = 0
-        for r in range(len(nums)):
-            cur += 1 if nums[r] % 2 == 1 else 0
-            tar = cur - k
-            if tar in prefix:
-                count += prefix[tar]
-            prefix[cur] = prefix.get(cur, 0) + 1
+        for n in nums:
+            curr_sum += 1 if n % 2 else 0
+            target = curr_sum - k
+            if target in sum_count:
+                count += sum_count[target]
+            sum_count[curr_sum] = sum_count.get(curr_sum, 0) + 1
         return count
