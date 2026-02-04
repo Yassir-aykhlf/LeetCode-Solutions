@@ -1,14 +1,14 @@
 class Solution:
     def longestWPI(self, hours: List[int]) -> int:
-        prefix_sum = {0: -1}
-        max_len = 0
-        curr = 0
-        for i, hour in enumerate(hours):
-            curr += 1 if hour > 8 else -1
-            if curr > 0:
-                max_len = i + 1
-            elif (curr - 1) in prefix_sum:
-                max_len = max(max_len, i - prefix_sum[curr - 1])
-            if curr not in prefix_sum:
-                prefix_sum[curr] = i
-        return max_len
+        acc_index = {0: -1}
+        longest_window = 0
+        acc = 0
+        for i, h in enumerate(hours):
+            acc += 1 if h > 8 else -1
+            if acc > 0:
+                longest_window = i + 1
+            elif acc - 1 in acc_index:
+                longest_window = max(longest_window, i - acc_index[acc - 1])
+            if acc not in acc_index:
+                acc_index[acc] = i
+        return longest_window
