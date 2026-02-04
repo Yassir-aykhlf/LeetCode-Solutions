@@ -1,12 +1,13 @@
 class Solution:
     def findMaxLength(self, nums: List[int]) -> int:
-        prefix = {0: -1}
-        max_len = 0
-        cur = 0
-        for r in range(len(nums)):
-            cur += 1 if nums[r] == 1 else -1
-            if cur in prefix:
-                max_len = max(max_len, r - prefix[cur])
+        acc_index = {0: -1}
+        acc = 0
+        max_inter = 0
+        for i, n in enumerate(nums):
+            acc += 1 if n == 1 else -1
+            # target = acc - n
+            if acc in acc_index:
+                max_inter = max(max_inter, i - acc_index[acc])
             else:
-                prefix[cur] = r
-        return max_len
+                acc_index[acc] = i
+        return max_inter
