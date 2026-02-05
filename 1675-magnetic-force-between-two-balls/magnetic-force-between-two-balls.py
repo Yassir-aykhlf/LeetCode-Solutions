@@ -3,11 +3,11 @@ class Solution:
         position.sort()
         def check(dist):
             count = 1
-            last_position = position[0]
-            for i in range(1, len(position)):
-                if position[i] - last_position >= dist:
+            last_pos = position[0]
+            for p in position:
+                if p - last_pos >= dist:
                     count += 1
-                    last_position = position[i]
+                    last_pos = p
             return count >= m
         lo, hi = 1, position[-1] - position[0]
         ans = hi
