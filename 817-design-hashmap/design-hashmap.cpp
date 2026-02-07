@@ -1,38 +1,38 @@
 class MyHashMap {
 private:
-    int capacity = 997;
-    std::vector<std::list<std::pair<int,int>>> bucket;
+    size_t capacity = 997;
+    std::vector<std::list<std::pair<int, int>>> _hashma;
     int hash(int key) {
         return key % capacity;
     }
 public:
     MyHashMap() {
-        bucket.resize(capacity);
+        _hashma.resize(capacity);
     }
     
     void put(int key, int value) {
-        auto &chain = bucket[hash(key)];
-        for (auto &p : chain) {
-            if (p.first == key) {
-                p.second = value;
+        auto &chain = _hashma[hash(key)];
+        for (auto &el : chain) {
+            if (el.first == key) {
+                el.second = value;
                 return;
             }
         }
-        chain.push_back({key, value});
+        chain.push_back(std::pair(key, value));
     }
     
     int get(int key) {
-        auto &chain = bucket[hash(key)];
-        for (auto &p : chain) {
-            if (p.first == key) {
-                return p.second;
+        auto &chain = _hashma[hash(key)];
+        for (auto &el : chain) {
+            if (el.first == key) {
+                return el.second;
             }
         }
         return -1;
     }
     
     void remove(int key) {
-        auto &chain = bucket[hash(key)];
+        auto &chain = _hashma[hash(key)];
         for (auto itr = chain.begin(); itr != chain.end(); ++itr) {
             if (itr->first == key) {
                 chain.erase(itr);
@@ -41,3 +41,11 @@ public:
         }
     }
 };
+
+/**
+ * Your MyHashMap object will be instantiated and called as such:
+ * MyHashMap* obj = new MyHashMap();
+ * obj->put(key,value);
+ * int param_2 = obj->get(key);
+ * obj->remove(key);
+ */
