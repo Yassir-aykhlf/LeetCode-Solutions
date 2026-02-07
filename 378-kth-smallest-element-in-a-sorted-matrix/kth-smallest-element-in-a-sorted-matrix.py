@@ -1,7 +1,13 @@
+"""
+Given an n x n matrix where each of the rows and columns is sorted in ascending order, return the kth smallest element in the matrix.
+
+Note that it is the kth smallest element in the sorted order, not the kth distinct element.
+
+You must find a solution with a memory complexity better than O(n^2).
+"""
+
 class Solution:
     def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
-        """ O(Nlogn); 29 ms; 23.92% """
-        # return heapq.nsmallest(k, sorted([num for arr in matrix for num in arr]))[-1]
         n = len(matrix)
         lo, hi = matrix[0][0], matrix[n - 1][n - 1]
         while lo < hi:
