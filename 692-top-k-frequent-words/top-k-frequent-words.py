@@ -1,3 +1,8 @@
 class Solution:
+    """
+    Given an array of strings words and an integer k, return the k most frequent strings.
+    Return the answer sorted by the frequency from highest to lowest. Sort the words with the same frequency by their lexicographical order.
+    """
     def topKFrequent(self, words: List[str], k: int) -> List[str]:
-        return [word for word, _ in sorted(collections.Counter(words).items(), key = lambda tup: (-tup[1], tup[0]))[:k]]
+        freq = collections.Counter(words)
+        return heapq.nsmallest(k, freq.keys(), key=lambda x: (-freq[x], x))
