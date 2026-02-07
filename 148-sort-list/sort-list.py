@@ -4,33 +4,43 @@
 #         self.val = val
 #         self.next = next
 class Solution:
+    """
+    Given the head of a linked list, return the list after sorting it in ascending order.
+    """
     def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
         if not head or not head.next:
             return head
-        l = head
-        mid = self.getMid(head)
-        r = mid.next
+        return self.mergeSort(head)
+        
+    def mergeSort(self, head):
+        if not head or not head.next:
+            return head
+        first = head
+        mid = self.findMid(head)
+        second = mid.next
         mid.next = None
-        l_sorted = self.sortList(l)
-        r_sorted = self.sortList(r)
-        return self.merge(l_sorted, r_sorted)
+        sorted_first = self.mergeSort(first)
+        sorted_second = self.mergeSort(second)
+        return self.mergeList(sorted_first, sorted_second)
 
-    def getMid(self, head):
-        slow, fast = head, head.next
+    def findMid(self, head):
+        slow = head
+        fast = head.next
         while fast and fast.next:
             slow = slow.next
             fast = fast.next.next
         return slow
-    def merge(self, lst1, lst2):
-        dummy = ListNode(-1)
+
+    def mergeList(self, l1, l2):
+        dummy = ListNode()
         curr = dummy
-        while lst1 and lst2:
-            if lst1.val < lst2.val:
-                curr.next = lst1
-                lst1 = lst1.next
+        while l1 and l2:
+            if l1.val < l2.val:
+                curr.next = l1
+                l1 = l1.next
             else:
-                curr.next = lst2
-                lst2 = lst2.next
+                curr.next = l2
+                l2 = l2.next
             curr = curr.next
-        curr.next = lst1 or lst2
+        curr.next = l1 or l2
         return dummy.next
