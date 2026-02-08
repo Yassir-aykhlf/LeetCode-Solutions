@@ -1,14 +1,4 @@
-from functools import cmp_to_key
-
 class Solution:
     def largestNumber(self, nums: List[int]) -> str:
-        nums_str = [str(n) for n in nums]
-        def compare(i, j):
-            if i + j > j + i:
-                return -1
-            elif j + i > i + j:
-                return 1
-            return 0
-        nums_str.sort(key=cmp_to_key(compare))
-        result = ''.join(nums_str)
+        result = ''.join(sorted([str(n) for n in nums], key = cmp_to_key(lambda a, b: -1 if a + b > b + a else 1)))
         return "0" if result[0] == "0" else result
