@@ -1,35 +1,31 @@
 class Solution:
-    """
-    Given an array of integers nums, sort the array in ascending order and return it.
-    You must solve the problem without using any built-in functions in O(nlog(n)) time complexity and with the smallest space complexity possible.
-    """
-    def mergeArr(self, arr, l, r):
-        tmp = []
-        mid = (l + r) // 2
+    def mergeArr(self, nums, l, mid, r):
+        arr = []
         i = l
         j = mid
         while i < mid and j < r:
-            if arr[i] < arr[j]:
-                tmp.append(arr[i])
+            if nums[i] < nums[j]:
+                arr.append(nums[i])
                 i += 1
             else:
-                tmp.append(arr[j])
+                arr.append(nums[j])
                 j += 1
         while i < mid:
-            tmp.append(arr[i])
+            arr.append(nums[i])
             i += 1
         while j < r:
-            tmp.append(arr[j])
+            arr.append(nums[j])
             j += 1
-        arr[l : r] = tmp
-    def MergeSort(self, arr, l, r):
-        if r - 1 <= l:
+        nums[l : r] = arr
+
+    def mergeSort(self, nums, l, r):
+        if l >= r - 1:
             return
         mid = (l + r) // 2
-        self.MergeSort(arr, l, mid)
-        self.MergeSort(arr, mid, r)
-        self.mergeArr(arr, l, r)
+        self.mergeSort(nums, l, mid)
+        self.mergeSort(nums, mid, r)
+        self.mergeArr(nums, l, mid, r)
+
     def sortArray(self, nums: List[int]) -> List[int]:
-        l, r = 0, len(nums)
-        self.MergeSort(nums, l, r)
+        self.mergeSort(nums, 0, len(nums))
         return nums
