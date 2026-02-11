@@ -4,12 +4,10 @@
 class Solution:
     def firstBadVersion(self, n: int) -> int:
         lo, hi = 0, n
-        ans = hi
-        while lo <= hi:
+        while lo < hi:
             mid = (lo + hi) // 2
             if isBadVersion(mid):
-                ans = mid
-                hi = mid - 1
+                hi = mid
             else:
                 lo = mid + 1
-        return ans
+        return hi
