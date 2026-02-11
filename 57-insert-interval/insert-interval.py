@@ -3,10 +3,10 @@ class Solution:
         intervals += [newInterval]
         intervals.sort()
         result = [intervals[0]]
-        for current in intervals[1:]:
+        for inter in intervals[1:]:
             last_inter = result[-1]
-            if current[0] <= last_inter[1]:
-                last_inter[-1] = max(current[1], last_inter[1])
+            if inter[0] <= last_inter[1]:
+                last_inter[1] = max(last_inter[1], inter[1])
             else:
-                result.append(current)
+                result.append(inter)
         return result
