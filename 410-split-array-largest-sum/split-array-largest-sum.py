@@ -1,20 +1,24 @@
 class Solution:
     def splitArray(self, nums: List[int], k: int) -> int:
-        lo, hi = max(nums), sum(nums)
-        def can_split(capacity):
-            count = 1
-            cur_sum = 0
-            for num in nums:
-                if cur_sum + num > capacity:
-                    count += 1
-                    cur_sum = num
+        def check(sum):
+            # can make at least k subarrays
+            curr_sum = 0
+            splits = 1
+            for r in range(len(nums)):
+                if curr_sum + nums[r] > sum:
+                    splits += 1
+                    curr_sum = nums[r]
                 else:
-                    cur_sum += num
-            return count <= k
-        while lo < hi:
+                    curr_sum += nums[r]
+            return splits <= k
+        
+        lo, hi = max(nums), sum(nums)
+        ans = hi
+        while lo <= hi:
             mid = (lo + hi) // 2
-            if can_split(mid):
-                hi = mid
+            if check(mid):
+                ans = mid
+                hi = mid - 1
             else:
                 lo = mid + 1
-        return hi
+        return ans
