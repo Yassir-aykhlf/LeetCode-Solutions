@@ -6,7 +6,7 @@ class Solution:
             events.append((end, 0, -count))
         events.sort()
         load = 0
-        for point, _, value in events:
+        for _, _, value in events:
             load += value
             if load > capacity:
                 return False
