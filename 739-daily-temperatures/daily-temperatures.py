@@ -4,7 +4,7 @@ class Solution:
         stack = []
         for i, t in enumerate(temperatures):
             while stack and stack[-1][1] < t:
-                prev_i, prev_t = stack.pop()
-                answer[prev_i] = i - prev_i
+                idx, tem = stack.pop()
+                answer[idx] = i - idx
             stack.append((i, t))
         return answer
