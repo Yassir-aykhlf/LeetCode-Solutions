@@ -2,13 +2,13 @@ class Solution:
     def maxDistance(self, position: List[int], m: int) -> int:
         position.sort()
         def check(dist):
-            count = 1
-            last_pos = position[0]
+            placed = 1
+            last_p = position[0]
             for p in position:
-                if p - last_pos >= dist:
-                    count += 1
-                    last_pos = p
-            return count >= m
+                if p - last_p >= dist:
+                    placed += 1
+                    last_p = p
+            return placed >= m
         lo, hi = 1, position[-1] - position[0]
         ans = hi
         while lo <= hi:
