@@ -1,20 +1,22 @@
 class Solution:
     def shipWithinDays(self, weights: List[int], days: int) -> int:
-        def check(max_capacity):
+        def check(capacity):
             days_taken = 1
-            cur_sum = 0
+            curr_weight = 0
             for w in weights:
-                if cur_sum + w > max_capacity:
+                if curr_weight + w > capacity:
                     days_taken += 1
-                    cur_sum = w
+                    curr_weight = w
                 else:
-                    cur_sum += w
+                    curr_weight += w
             return days_taken <= days
         lo, hi = max(weights), sum(weights)
-        while lo < hi:
+        ans = hi
+        while lo <= hi:
             mid = (lo + hi) // 2
             if check(mid):
-                hi = mid
+                ans = mid
+                hi = mid - 1
             else:
                 lo = mid + 1
-        return hi
+        return ans
