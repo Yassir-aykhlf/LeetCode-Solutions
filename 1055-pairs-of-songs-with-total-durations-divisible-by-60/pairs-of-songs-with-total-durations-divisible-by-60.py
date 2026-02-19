@@ -1,11 +1,11 @@
 class Solution:
     def numPairsDivisibleBy60(self, time: List[int]) -> int:
-        count = 0
         rems = {}
+        count = 0
         for t in time:
-            rem = t % 60
-            tar = (60 - t) % 60
+            curr = t % 60 
+            tar = (60 - curr) % 60
             if tar in rems:
                 count += rems[tar]
-            rems[rem] = rems.get(rem, 0) + 1
+            rems[curr] = rems.get(curr, 0) + 1
         return count
