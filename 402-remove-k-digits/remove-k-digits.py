@@ -1,12 +1,12 @@
 class Solution:
     def removeKdigits(self, num: str, k: int) -> str:
         stack = []
-        for n in num:
-            while k and stack and stack[-1] > n:
+        for c in num:
+            while k and stack and c < stack[-1]:
                 stack.pop()
                 k -= 1
-            stack.append(n)
-        while stack and k:
+            stack.append(c)
+        while k and stack:
             stack.pop()
             k -= 1
         res = ''.join(stack).lstrip('0')
