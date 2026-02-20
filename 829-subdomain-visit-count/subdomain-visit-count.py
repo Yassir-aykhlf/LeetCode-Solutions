@@ -1,12 +1,12 @@
 class Solution:
     def subdomainVisits(self, cpdomains: List[str]) -> List[str]:
-        domains = collections.defaultdict(int)
+        domain_count = defaultdict(int)
         for cpdomain in cpdomains:
-            count_str, domain = cpdomain.split()
-            count = int(count_str)
-            domains[domain] += count
+            rep_str, domain = cpdomain.split()
+            rep = int(rep_str)
+            domain_count[domain] += rep
             for i, c in enumerate(domain):
                 if c == '.':
-                    dom = domain[i+1:]
-                    domains[dom] += count
-        return [f"{count} {dom}" for dom, count in domains.items()]
+                    sub_domain = domain[i+1:]
+                    domain_count[sub_domain] += rep
+        return [f"{rep} {domain}" for domain, rep in domain_count.items()]
