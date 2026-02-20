@@ -1,14 +1,17 @@
 class Solution:
     def findAndReplacePattern(self, words: List[str], pattern: str) -> List[str]:
-        def isIso(word, pattern):
-            if len(word) != len(pattern):
+        def isMatch(word: str) -> bool:
+            word_list = list(word)
+            pattern_list = list(pattern)
+            if len(word_list) != len(pattern_list):
                 return False
-            w_p = {}
-            p_w = {}
-            for p, w in zip(pattern, word):
-                if (p in p_w and p_w[p] != w) or (w in w_p and w_p[w] != p):
-                    return False
-                w_p[w] = p
-                p_w[p] = w
+            w_map = {}
+            p_map = {}
+            for w, p in zip(word_list, pattern_list):
+                if w in w_map and w_map[w] != p or \
+                   p in p_map and p_map[p] != w:
+                   return False
+                w_map[w] = p
+                p_map[p] = w
             return True
-        return [word for word in words if isIso(word, pattern)]
+        return [word for word in words if isMatch(word)]
