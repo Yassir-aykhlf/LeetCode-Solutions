@@ -6,11 +6,23 @@
  * };
  */
 struct ListNode *getIntersectionNode(struct ListNode *headA, struct ListNode *headB) {
-    struct ListNode *ra = headA;
-    struct ListNode *rb = headB;
-    while (ra != rb) {
-        ra = ra ? ra->next : headB;
-        rb = rb ? rb->next : headA;
+    struct ListNode* runnerA = malloc(sizeof(struct ListNode*));
+    struct ListNode* runnerB = malloc(sizeof(struct ListNode*));
+    runnerA = headA;
+    runnerB = headB;
+    while (runnerA != runnerB) {
+        if (runnerA == NULL) {
+            runnerA = headB;
+        }
+        else {
+            runnerA = runnerA->next;
+        }
+        if (runnerB == NULL) {
+            runnerB = headA;
+        }
+        else {
+            runnerB = runnerB->next;
+        }
     }
-    return ra;
+    return runnerA;
 }
