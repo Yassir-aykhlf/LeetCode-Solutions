@@ -1,17 +1,17 @@
 class Solution:
     def minDays(self, bloomDay: List[int], m: int, k: int) -> int:
-        def check(day):
+        def check(days):
             flowers = 0
-            bqts = 0
+            bouquets = 0
             for b in bloomDay:
-                if b <= day:
+                if b <= days:
                     flowers += 1
                     if flowers == k:
+                        bouquets += 1
                         flowers = 0
-                        bqts += 1
                 else:
                     flowers = 0
-            return bqts >= m
+            return bouquets >= m
         lo, hi = min(bloomDay), max(bloomDay)
         ans = -1
         while lo <= hi:
