@@ -13,5 +13,6 @@ class Solution:
             dfs(node.left)
             result.append(node.val)
             dfs(node.right)
-        dfs(root)
+        if root:
+            dfs(root)
         return result
