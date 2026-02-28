@@ -1,10 +1,10 @@
 class Solution:
     def maximumGap(self, nums: List[int]) -> int:
         nums.sort()
-        l, r = 0, 1
+        a, b = 0, 1
         max_gap = 0
-        while r < len(nums):
-            max_gap = max(max_gap, nums[r] - nums[l])
-            l += 1
-            r += 1
+        while b < len(nums):
+            max_gap = max(max_gap, nums[b] - nums[a])
+            a += 1
+            b += 1
         return max_gap
