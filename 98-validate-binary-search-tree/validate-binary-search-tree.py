@@ -5,13 +5,16 @@
 #         self.left = left
 #         self.right = right
 class Solution:
+    def __init__(self):
+        self.prev = float('-inf')
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
-        def is_valid(node, min_cap, max_cap) -> bool:
+        def inorder(node):
             if not node:
                 return True
-            if not (min_cap < node.val < max_cap):
+            if not inorder(node.left):
                 return False
-            is_left_valid = is_valid(node.left, min_cap, node.val)
-            is_right_valid = is_valid(node.right, node.val, max_cap)
-            return is_left_valid and is_right_valid
-        return is_valid(root, float('-inf'), float('inf'))
+            if node.val <= self.prev:
+                return False
+            self.prev = node.val
+            return inorder(node.right)
+        return inorder(root)
