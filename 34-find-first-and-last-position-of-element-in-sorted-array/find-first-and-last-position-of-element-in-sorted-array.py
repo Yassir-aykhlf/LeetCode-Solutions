@@ -1,19 +1,5 @@
 class Solution:
     def searchRange(self, nums: List[int], target: int) -> List[int]:
-        def findBound(isFirst: bool) -> int:
-            lo, hi = 0, len(nums) - 1
-            bound = -1
-            while lo <= hi:
-                mid = (lo + hi) // 2
-                if nums[mid] == target:
-                    bound = mid
-                    if isFirst:
-                        hi = mid - 1
-                    else:
-                        lo = mid + 1
-                elif nums[mid] < target:
-                    lo = mid + 1
-                else:
-                    hi = mid - 1
-            return bound
-        return [findBound(True), findBound(False)]
+        if target not in set(nums):
+            return [-1, -1]
+        return [bisect.bisect_left(nums, target), bisect.bisect_right(nums, target) - 1]
