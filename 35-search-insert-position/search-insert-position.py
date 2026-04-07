@@ -1,6 +1,5 @@
 class Solution:
     def searchInsert(self, nums: List[int], target: int) -> int:
-        # upper bound
         lo, hi = 0, len(nums)
         while lo < hi:
             mid = (lo + hi) // 2
@@ -10,4 +9,4 @@ class Solution:
                 lo = mid + 1
             else:
                 hi = mid
-        return hi
+        return lo
