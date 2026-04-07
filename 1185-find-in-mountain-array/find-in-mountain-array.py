@@ -7,41 +7,35 @@
 #    def length(self) -> int:
 
 class Solution:
-    """
-    Given a mountain array mountainArr, return the minimum index such that mountainArr.get(index) == target. If such an index does not exist, return -1.
-    """
     def findInMountainArray(self, target: int, mountainArr: 'MountainArray') -> int:
-        n = mountainArr.length()
         # find peak index
+        n = mountainArr.length()
         lo, hi = 0, n - 1
         while lo < hi:
             mid = (lo + hi) // 2
-            if mountainArr.get(mid) > mountainArr.get(mid + 1):
+            if mountainArr.get(mid) < mountainArr.get(mid + 1):
+                lo = mid + 1
+            else:
                 hi = mid
-            else:
-                lo = mid + 1
-        peakIndex = hi
-        if mountainArr.get(peakIndex) == target:
-            peakIndex
-        # search left side
-        lo, hi = 0, peakIndex
+        peakIdx = hi
+        # search left
+        lo, hi = 0, peakIdx
         while lo <= hi:
             mid = (lo + hi) // 2
             if mountainArr.get(mid) == target:
-                return mid           
-            elif mountainArr.get(mid) > target:
-                hi = mid - 1
-            else:
-                lo = mid + 1
-        # search right side
-        lo, hi = peakIndex, n - 1
-        while lo <= hi:
-            mid = (lo + hi) // 2
-            if mountainArr.get(mid) == target:
-                return mid           
+                return mid
             elif mountainArr.get(mid) < target:
-                hi = mid - 1
-            else:
                 lo = mid + 1
-        # not found
+            else:
+                hi = mid - 1
+        # search right
+        lo, hi = peakIdx + 1, n - 1
+        while lo <= hi:
+            mid = (lo + hi) // 2
+            if mountainArr.get(mid) == target:
+                return mid
+            elif mountainArr.get(mid) > target:
+                lo = mid + 1
+            else:
+                hi = mid - 1
         return -1
