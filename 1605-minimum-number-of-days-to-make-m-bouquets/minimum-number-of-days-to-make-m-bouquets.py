@@ -1,19 +1,19 @@
 class Solution:
     def minDays(self, bloomDay: List[int], m: int, k: int) -> int:
-        def check(days):
-            flowers = 0
+        def check(min_days):
             bouquets = 0
+            flowers = 0
             for b in bloomDay:
-                if b <= days:
+                if b <= min_days:
                     flowers += 1
                     if flowers == k:
-                        bouquets += 1
                         flowers = 0
+                        bouquets += 1
                 else:
                     flowers = 0
             return bouquets >= m
-        lo, hi = min(bloomDay), max(bloomDay)
         ans = -1
+        lo, hi = min(bloomDay), max(bloomDay)
         while lo <= hi:
             mid = (lo + hi) // 2
             if check(mid):
