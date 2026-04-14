@@ -8,9 +8,12 @@ class Solution:
                 col < 0 or col >= n or \
                 (row, col) in visited or \
                 grid[row][col] == 0:
-                return 0
+                return
             visited.add((row, col))
-            return 1 + dfs(row + 1, col) + dfs(row - 1, col) + dfs(row, col + 1) + dfs(row, col - 1)
+            dfs(row + 1, col)
+            dfs(row - 1, col)
+            dfs(row, col + 1)
+            dfs(row, col - 1)
         for row in range(m):
             if grid[row][0] == 1:
                 dfs(row, 0)
