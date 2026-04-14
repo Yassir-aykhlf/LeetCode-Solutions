@@ -24,5 +24,5 @@ class Solution:
         for row in range(1, m - 1):
             for col in range(1, n - 1):
                 if grid[row][col] == 1 and (row, col) not in visited:
-                    count += dfs(row, col)
+                    count += 1
         return count
