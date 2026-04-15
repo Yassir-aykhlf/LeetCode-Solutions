@@ -1,15 +1,26 @@
 class Solution:
     def findCircleNum(self, isConnected: List[List[int]]) -> int:
-        visited = set()
-        count = 0
         n = len(isConnected)
-        def dfs(i):
-            visited.add(i)
-            for j in range(n):
-                if isConnected[i][j] == 1 and j not in visited:
-                    dfs(j)
+        parent = [i for i in range(n)]
+        total = n
+
+        def find(node):
+            if parent[node] == node:
+                return node
+            parent[node] = find(parent[node])
+            return parent[node]
+
+        def union(i, j):
+            nonlocal total
+            root_i = find(i)
+            root_j = find(j)
+            if root_i != root_j:
+                parent[root_i] = root_j
+                total -= 1
+    
         for i in range(n):
-            if i not in visited:
-                count += 1
-                dfs(i)
-        return count
+            for j in range(i + 1, n):
+                if isConnected[i][j] == 1:
+                    union(i, j)
+
+        return total
