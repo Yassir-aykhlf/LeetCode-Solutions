@@ -10,7 +10,6 @@ class Solution:
                     isWater[r][c] = 0
                 else:
                     isWater[r][c] = -1
-        print(dq)
         while dq:
             level_size = len(dq)
             for i in range(level_size):
