@@ -1,26 +1,26 @@
 class Solution:
     def findCircleNum(self, isConnected: List[List[int]]) -> int:
         n = len(isConnected)
-        parent = [i for i in range(n)]
-        total = n
+        root = [i for i in range(n)]
+        count = n
 
         def find(node):
-            if parent[node] == node:
+            if node == root[node]:
                 return node
-            parent[node] = find(parent[node])
-            return parent[node]
+            root[node] = find(root[node])
+            return root[node]
 
-        def union(i, j):
-            nonlocal total
-            root_i = find(i)
-            root_j = find(j)
-            if root_i != root_j:
-                parent[root_i] = root_j
-                total -= 1
-    
+        def union(node1, node2):
+            nonlocal count
+            root1 = find(node1)
+            root2 = find(node2)
+            if root1 != root2:
+                root[root1] = root2
+                count -= 1
+
         for i in range(n):
             for j in range(i + 1, n):
-                if isConnected[i][j] == 1:
+                if isConnected[i][j]:
                     union(i, j)
 
-        return total
+        return count
