@@ -1,6 +1,8 @@
 class Solution:
     def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
         wordSet = set(wordList)
+        if endWord not in wordList:
+            return 0
         dq = deque([(beginWord, 1)])
         while dq:
             word, seq_len = dq.popleft()
@@ -10,6 +12,6 @@ class Solution:
                 for c in "abcdefghijklmnopqrstuvwxyz":
                     perm = word[:i] + c + word[i+1:]
                     if perm in wordSet:
-                        dq.append((perm, seq_len + 1))
                         wordSet.remove(perm)
+                        dq.append((perm, seq_len + 1))
         return 0
