@@ -10,14 +10,14 @@ class Solution:
             if code == target:
                 return turns
             for i in range(4):
-                up_digit = (int(code[i]) + 1) % 10
-                perm = code[:i] + str(up_digit) + code[i+1:]
-                if perm not in deadSet:
-                    deadSet.add(perm)
-                    dq.append((perm, turns + 1))
-                down_digit = (int(code[i]) - 1) % 10
-                perm = code[:i] + str(down_digit) + code[i+1:]
-                if perm not in deadSet:
-                    deadSet.add(perm)
-                    dq.append((perm, turns + 1))
+                up = (int(code[i]) + 1) % 10
+                up_code = code[:i] + str(up) + code[i+1:]
+                if up_code not in deadSet:
+                    deadSet.add(up_code)
+                    dq.append((up_code, turns + 1))
+                down = (int(code[i]) - 1) % 10
+                down_code = code[:i] + str(down) + code[i+1:]
+                if down_code not in deadSet:
+                    deadSet.add(down_code)
+                    dq.append((down_code, turns + 1))
         return -1
