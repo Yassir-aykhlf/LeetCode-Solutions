@@ -3,15 +3,15 @@ class Solution:
         wordSet = set(wordList)
         if endWord not in wordSet:
             return 0
-        dq = deque([(beginWord, 1)])
+        dq = deque([(beginWord, 0)])
         while dq:
-            word, turns = dq.popleft()
-            if word == endWord:
-                return turns
-            for i in range(len(word)):
+            prev_word, seq_len = dq.popleft()
+            if prev_word == endWord:
+                return seq_len + 1
+            for i in range(len(prev_word)):
                 for c in "abcdefghijklmnopqrstuvwxyz":
-                    perm = word[:i] + c + word[i+1:]
-                    if perm in wordSet:
-                        wordSet.remove(perm)
-                        dq.append((perm, turns + 1))
+                    new_word = prev_word[:i] + c + prev_word[i+1:]
+                    if new_word in wordSet:
+                        dq.append((new_word, seq_len + 1))
+                        wordSet.remove(new_word)
         return 0
