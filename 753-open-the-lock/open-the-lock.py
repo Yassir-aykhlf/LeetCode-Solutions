@@ -3,8 +3,8 @@ class Solution:
         deadSet = set(deadends)
         if "0000" in deadSet:
             return -1
-        dq = deque([("0000", 0)])
         deadSet.add("0000")
+        dq = deque([("0000", 0)])
         while dq:
             code, turns = dq.popleft()
             if code == target:
