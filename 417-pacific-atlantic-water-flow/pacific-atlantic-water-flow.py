@@ -1,26 +1,22 @@
 class Solution:
     def pacificAtlantic(self, heights: List[List[int]]) -> List[List[int]]:
-        p_ocean = set()
-        a_ocean = set()
         ROW, COL = len(heights), len(heights[0])
-
-        def dfs(row, col, ocean, prev_height):
+        pacific_set = set()
+        atlantic_set = set()
+        direction = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+        def bfs(row, col, ocean_set, prev_height):
             if row < 0 or row >= ROW or \
                 col < 0 or col >= COL or \
-                (row, col) in ocean or \
+                (row, col) in ocean_set or \
                 heights[row][col] < prev_height:
                 return
-            ocean.add((row, col))
-            dfs(row + 1, col, ocean, heights[row][col])
-            dfs(row - 1, col, ocean, heights[row][col])
-            dfs(row, col + 1, ocean, heights[row][col])
-            dfs(row, col - 1, ocean, heights[row][col])
-
+            ocean_set.add((row, col))
+            for dr, dc in direction:
+                bfs(row + dr, col + dc, ocean_set, heights[row][col])
         for row in range(ROW):
-            dfs(row, 0, p_ocean, heights[row][0])
-            dfs(row, COL - 1, a_ocean, heights[row][COL - 1])
+            bfs(row, 0, pacific_set, heights[row][0])
+            bfs(row, COL-1, atlantic_set, heights[row][COL-1])
         for col in range(COL):
-            dfs(ROW - 1, col, a_ocean, heights[ROW - 1][col])
-            dfs(0, col, p_ocean, heights[0][col])
-        
-        return [list(coord) for coord in (p_ocean & a_ocean)]
+            bfs(0, col, pacific_set, heights[0][col])
+            bfs(ROW-1, col, atlantic_set, heights[ROW-1][col])
+        return [list(coord) for coord in (pacific_set & atlantic_set)]
