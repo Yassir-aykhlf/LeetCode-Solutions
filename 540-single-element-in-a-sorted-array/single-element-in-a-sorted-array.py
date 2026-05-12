@@ -3,10 +3,9 @@ class Solution:
         lo, hi = 0, len(nums) - 1
         while lo < hi:
             mid = (lo + hi) // 2
-            if mid % 2:
-                mid -= 1
-            if nums[mid] == nums[mid + 1]:
-                lo = mid + 2
-            else:
+            if mid % 2: mid -= 1
+            if nums[mid] != nums[mid + 1]:
                 hi = mid
+            else:
+                lo = mid + 2
         return nums[hi]
