@@ -3,8 +3,8 @@ class Solution:
         seen = set()
         res = set()
         for i in range(len(s) - 9):
-            if s[i : i + 10] not in seen:
-                seen.add(s[i : i + 10])
+            if s[i:i+10] in seen:
+                res.add(s[i:i+10])
             else:
-                res.add(s[i : i + 10])
+                seen.add(s[i:i+10])
         return list(res)
