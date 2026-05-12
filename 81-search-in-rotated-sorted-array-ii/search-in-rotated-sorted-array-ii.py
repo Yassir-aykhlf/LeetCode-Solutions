@@ -8,7 +8,8 @@ class Solution:
             if nums[lo] == nums[mid] == nums[hi]:
                 lo += 1
                 hi -= 1
-            elif nums[mid] <= nums[hi]:
+                continue
+            if nums[mid] <= nums[hi]:
                 if nums[mid] < target <= nums[hi]:
                     lo = mid + 1
                 else:
