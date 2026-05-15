@@ -1,5 +1,12 @@
 class Solution:
     def sortArrayByParity(self, nums: List[int]) -> List[int]:
-        def isPair(i):
-            return 0 if i % 2 == 0 else 1
-        return sorted(nums, key=isPair)
+        i, j = 0, len(nums) - 1
+        res = [0] * len(nums)
+        for n in nums:
+            if n % 2:
+                res[j] = n
+                j -= 1
+            else:
+                res[i] = n
+                i += 1
+        return res
