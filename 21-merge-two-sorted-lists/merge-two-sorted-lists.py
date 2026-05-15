@@ -15,5 +15,5 @@ class Solution:
                 curr.next = list2
                 list2 = list2.next
             curr = curr.next
-        curr.next = list1 or list2
+        curr.next = list1 if list1 else list2
         return dummy.next
