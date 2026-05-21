@@ -3,9 +3,9 @@ class Solution:
         rems = {}
         count = 0
         for t in time:
-            curr = t % 60 
-            tar = (60 - curr) % 60
-            if tar in rems:
-                count += rems[tar]
-            rems[curr] = rems.get(curr, 0) + 1
+            rem = t % 60
+            com = (60 - rem) % 60
+            if com in rems:
+                count += rems[com]
+            rems[rem] = rems.get(rem, 0) + 1
         return count
