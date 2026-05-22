@@ -5,7 +5,7 @@ class Solution:
             mid = (lo + hi) // 2
             if nums[mid] == target:
                 return mid
-            if nums[mid] < nums[hi]:
+            if nums[mid] <= nums[hi]:
                 if nums[mid] < target <= nums[hi]:
                     lo = mid + 1
                 else:
