@@ -1,6 +1,5 @@
 class Solution:
     def romanToInt(self, s: str) -> int:
-        syms = ['I', 'V', 'X', 'L', 'C', 'D', 'M']
         translate = {
             "I": 1,
             "V": 5,
@@ -13,7 +12,7 @@ class Solution:
         acc = translate[s[-1]]
         for i in range(len(s) - 2, -1, -1):
             sym = s[i]
-            if syms.index(s[i]) < syms.index(s[i + 1]):
+            if translate[s[i]] < translate[s[i + 1]]:
                 acc -= translate[sym]
             else:
                 acc += translate[sym]
