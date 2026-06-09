@@ -7,7 +7,7 @@ class Solution:
         ]
         res = []
         for val, sym in roman_map:
-            m = num // val
-            res += m * [sym]
-            num -= m * val
+            count = num // val
+            res.append(count * sym)
+            num %= val
         return "".join(res)
