@@ -1,6 +1,6 @@
 class Solution:
     def romanToInt(self, s: str) -> int:
-        translate = {
+        roman_int = {
             "I": 1,
             "V": 5,
             "X": 10,
@@ -9,11 +9,10 @@ class Solution:
             "D": 500,
             "M": 1000
         }
-        acc = translate[s[-1]]
-        for i in range(len(s) - 2, -1, -1):
-            sym = s[i]
-            if translate[s[i]] < translate[s[i + 1]]:
-                acc -= translate[sym]
+        res = roman_int[s[-1]]
+        for i in range(len(s) - 1):
+            if roman_int[s[i]] < roman_int[s[i + 1]]:
+                res -= roman_int[s[i]]
             else:
-                acc += translate[sym]
-        return acc
+                res += roman_int[s[i]]
+        return res
