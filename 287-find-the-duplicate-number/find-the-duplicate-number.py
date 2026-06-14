@@ -1,13 +1,17 @@
 class Solution:
     def findDuplicate(self, nums: List[int]) -> int:
-        slow = nums[0]
-        fast = nums[0]
-        while True:
-            slow = nums[slow]
-            fast = nums[nums[fast]]
-            if slow == fast:
-                slow = nums[0]
-                while slow != fast:
-                    slow = nums[slow]
-                    fast = nums[fast]
-                return slow
+        n = len(nums)
+        l, r = 1, n - 1
+        def check(val):
+            count = 0
+            for n in nums:
+                if n <= val:
+                    count += 1
+            return count
+        while l < r:
+            mid = (l + r) // 2
+            if check(mid) > mid:
+                r = mid
+            else:
+                l = mid + 1
+        return l
