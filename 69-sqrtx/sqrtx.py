@@ -1,14 +1,14 @@
 class Solution:
     def mySqrt(self, x: int) -> int:
-        best_res = -1
-        lo, hi = 0, x
-        while lo <= hi:
-            mid = (lo + hi) // 2
+        l, r = 0, x
+        best = 0
+        while l <= r:
+            mid = (l + r) // 2
             if mid * mid == x:
                 return mid
             elif mid * mid < x:
-                best_res = mid
-                lo = mid + 1
+                best = mid
+                l = mid + 1
             else:
-                hi = mid - 1
-        return best_res
+                r = mid - 1
+        return best
