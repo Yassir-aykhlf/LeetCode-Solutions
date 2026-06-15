@@ -4,7 +4,6 @@ class Solution:
         prefix = [0] * (n + 1)
         for i in range(n):
             prefix[i + 1] = prefix[i] + (1 if s[i] == '*' else 0)
-        # what we have now: ...
         nearest_left = [-1] * n
         curr = -1
         for i in range(n):
@@ -17,7 +16,6 @@ class Solution:
             if s[i] == '|':
                 curr = i
             nearest_right[i] = curr
-        # what we have now: ...
         ans = []
         for s, e in queries:
             L, R = nearest_right[s], nearest_left[e]
