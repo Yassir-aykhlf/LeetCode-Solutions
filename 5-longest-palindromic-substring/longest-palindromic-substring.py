@@ -7,7 +7,7 @@ class Solution:
                     break
                 i -= 1
                 j += 1
-            return s[i + 1: j]
+            return s[i + 1 : j]
         for i in range(len(s)):
             odd = expand(i, i)
             if len(odd) > len(res):
