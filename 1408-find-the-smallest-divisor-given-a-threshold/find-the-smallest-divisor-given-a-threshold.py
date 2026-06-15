@@ -1,13 +1,14 @@
 class Solution:
     def smallestDivisor(self, nums: List[int], threshold: int) -> int:
         l, r = 1, max(nums)
-        # why I chose r as max divisor: because this way max_sum = len(nums)? idk? let's see
-        while l < r:
-            mid = (l + r) // 2
+        def check(divisor):
             sum_ = 0
             for n in nums:
-                sum_ += (n + mid - 1) // mid
-            if sum_ <= threshold:
+                sum_ += (n + divisor - 1) // divisor
+            return sum_ <= threshold
+        while l < r:
+            mid = (l + r) // 2
+            if check(mid):
                 r = mid
             else:
                 l = mid + 1
