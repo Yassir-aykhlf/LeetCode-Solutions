@@ -1,9 +1,11 @@
 import hashlib
 
 class Codec:
-    mapping = {}
+    def __init__(self):
+        self.mapping = {}
+
     def encode(self, longUrl: str) -> str:
-        code = hashlib.sha256().hexdigest()[:6]
+        code = hashlib.sha256(longUrl.encode()).hexdigest()[:6]
         self.mapping[code] = longUrl
         return f"http://tinyurl.com/{code}"
 
@@ -11,7 +13,3 @@ class Codec:
         code = shortUrl[-6:]
         if code in self.mapping:
             return self.mapping[code]
-
-# Your Codec object will be instantiated and called as such:
-# codec = Codec()
-# codec.decode(codec.encode(url))
