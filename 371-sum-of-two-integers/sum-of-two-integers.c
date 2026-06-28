@@ -1,8 +1,8 @@
 int getSum(int a, int b) {
-    while (b) {
-        int carry = a & b;
+    while (b != 0) {
+        unsigned int carry = (unsigned int)(a & b) << 1;
         a = a ^ b;
-        b = (unsigned int)carry << 1;
+        b = carry;
     }
     return a;
 }
