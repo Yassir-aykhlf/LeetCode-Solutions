@@ -1,13 +1,14 @@
 class Solution:
     def findMaxLength(self, nums: List[int]) -> int:
-        acc_index = {0: -1}
-        acc = 0
-        max_inter = 0
-        for i, n in enumerate(nums):
-            acc += 1 if n == 1 else -1
-            # target = acc - n
-            if acc in acc_index:
-                max_inter = max(max_inter, i - acc_index[acc])
+        max_len = 0
+        # when was the last position we have seen a sum equal to the current sum
+        # cuz that means everything in between sums to zero
+        sum_to_pos = {0: -1}
+        curr_sum = 0
+        for i, num in enumerate(nums):
+            curr_sum += 1 if num == 1 else -1
+            if curr_sum in sum_to_pos:
+                max_len = max(max_len, i - sum_to_pos[curr_sum])
             else:
-                acc_index[acc] = i
-        return max_inter
+                sum_to_pos[curr_sum] = i
+        return max_len
