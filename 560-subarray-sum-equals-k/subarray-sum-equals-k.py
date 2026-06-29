@@ -1,8 +1,8 @@
 class Solution:
     def subarraySum(self, nums: List[int], k: int) -> int:
-        sum_to_count = {0: 1}
-        curr_sum = 0
         count = 0
+        curr_sum = 0
+        sum_to_count = {0: 1}
         for num in nums:
             curr_sum += num
             prev_sum = curr_sum - k
