@@ -8,4 +8,4 @@ class Solution:
                     stack.pop()
             else:
                 stack.append([c, 1])
-        return ''.join(char * count for char, count in stack)
+        return ''.join([char * count for char, count in stack])
