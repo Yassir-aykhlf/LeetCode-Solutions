@@ -2,10 +2,10 @@ class Solution:
     def simplifyPath(self, path: str) -> str:
         dirs = path.split('/')
         stack = []
-        for dir_ in dirs:
-            if dir_ == '..':
+        for dir in dirs:
+            if dir == '..':
                 if stack:
                     stack.pop()
-            elif dir_ and dir_ != '.':
-                stack.append(dir_)
+            elif dir and dir != '.':
+                stack.append(dir)
         return '/' + '/'.join(stack)
