@@ -4,12 +4,12 @@ class Solution:
         words = s.split()
         if len(chars) != len(words):
             return False
-        char_word = {}
-        word_char = {}
-        for c, w in zip(chars, words):
-            if c in char_word and char_word[c] != w or \
-               w in word_char and word_char[w] != c:
-               return False
-            char_word[c] = w
-            word_char[w] = c
+        char_to_word = {}
+        word_to_char = {}
+        for char, word in zip(chars, words):
+            if char in char_to_word and char_to_word[char] != word or \
+                word in word_to_char and word_to_char[word] != char:
+                return False
+            char_to_word[char] = word
+            word_to_char[word] = char
         return True
