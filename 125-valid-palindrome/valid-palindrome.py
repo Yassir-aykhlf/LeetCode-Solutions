@@ -1,4 +1,16 @@
 class Solution:
     def isPalindrome(self, s: str) -> bool:
-        arr = [c.lower() for c in s if c.isalnum()]
-        return arr == arr[::-1]
+        n = len(s)
+        i, j = 0, n - 1
+        while i < j:
+            if not s[i].isalnum():
+                i += 1
+                continue
+            if not s[j].isalnum():
+                j -= 1
+                continue
+            if s[i].lower() != s[j].lower():
+                return False
+            i += 1
+            j -= 1
+        return True
