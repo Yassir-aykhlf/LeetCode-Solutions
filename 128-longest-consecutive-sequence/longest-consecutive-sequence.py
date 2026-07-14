@@ -4,8 +4,8 @@ class Solution:
         res = 0
         for n in nums_:
             if n - 1 not in nums_:
-                curr = 1
-                while n + curr in nums_:
-                    curr += 1
-                res = max(res, curr)
+                count = 1
+                while n + count in nums_:
+                    count += 1
+                res = max(res, count)
         return res
