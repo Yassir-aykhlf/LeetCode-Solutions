@@ -1,19 +1,19 @@
 class Solution:
     def searchRange(self, nums: List[int], target: int) -> List[int]:
-        def findBound(isLower):
+        def find(isLower: bool):
+            l, r = 0, len(nums) - 1
             res = -1
-            lo, hi = 0, len(nums) - 1
-            while lo <= hi:
-                mid = (lo + hi) // 2
+            while l <= r:
+                mid = (l + r) // 2
                 if nums[mid] == target:
                     res = mid
                     if isLower:
-                        hi = mid - 1
+                        r = mid - 1
                     else:
-                        lo = mid + 1
+                        l = mid + 1
                 elif nums[mid] < target:
-                    lo = mid + 1
-                else:
-                    hi = mid - 1
+                    l = mid + 1
+                else: 
+                    r = mid - 1
             return res
-        return [findBound(True), findBound(False)]
+        return [find(True), find(False)]
