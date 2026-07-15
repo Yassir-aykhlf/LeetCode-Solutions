@@ -3,11 +3,11 @@
 
 class Solution:
     def firstBadVersion(self, n: int) -> int:
-        lo, hi = 1, n
-        while lo < hi:
-            mid = (lo + hi) // 2
+        l, r = 1, n
+        while l < r:
+            mid = (l + r) // 2
             if isBadVersion(mid):
-                hi = mid
+                r = mid
             else:
-                lo = mid + 1
-        return hi
+                l = mid + 1
+        return r
