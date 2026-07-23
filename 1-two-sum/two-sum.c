@@ -1,4 +1,4 @@
-#define TABLE_SIZE 997
+#define TABLE_SIZE 10
 
 typedef struct s_node
 {
