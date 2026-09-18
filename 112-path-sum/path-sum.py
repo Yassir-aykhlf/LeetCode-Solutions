@@ -7,14 +7,13 @@
 class Solution:
     def __init__(self):
         self.res = False
-    def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
+    def hasPathSum(self, root: TreeNode | None, targetSum: int) -> bool:
         def dfs(node, acc):
             if not node:
                 return 0
-            acc += node.val
-            dfs(node.left, acc)
-            dfs(node.right, acc)
-            if acc == targetSum and not node.left and not node.right:
+            if node.val + acc == targetSum and not node.left and not node.right:
                 self.res = True
+            dfs(node.left, acc + node.val)
+            dfs(node.right, acc + node.val)
         dfs(root, 0)
         return self.res
