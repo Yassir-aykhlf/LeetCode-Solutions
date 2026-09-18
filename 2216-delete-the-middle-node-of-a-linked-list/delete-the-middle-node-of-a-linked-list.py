@@ -4,12 +4,12 @@
 #         self.val = val
 #         self.next = next
 class Solution:
-    def deleteMiddle(self, head: Optional[ListNode]) -> Optional[ListNode]:
+    def deleteMiddle(self, head: ListNode | None) -> ListNode | None:
         dummy = ListNode(-1, head)
         slow = dummy
         fast = dummy.next
         while fast and fast.next:
-            fast = fast.next.next
             slow = slow.next
+            fast = fast.next.next
         slow.next = slow.next.next
         return dummy.next
