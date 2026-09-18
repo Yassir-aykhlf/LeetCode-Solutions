@@ -1,11 +1,11 @@
+from functools import cmp_to_key
+
 class Solution:
-    def largestNumber(self, nums: List[int]) -> str:
-        def compare(a, b):
-            if a + b > b + a:
+    def largestNumber(self, nums: list[int]) -> str:
+        def cmp(n1, n2):
+            if str(n1) + str(n2) > str(n2) + str(n1):
                 return -1
             else:
                 return 1
-        nums_str = [str(num) for num in nums]
-        nums_str.sort(key=cmp_to_key(compare))
-        res = ''.join(nums_str)
-        return res[0] if res[0] == "0" else res
+        nums_ = sorted(nums, key=cmp_to_key(cmp))
+        return "".join(str(n) for n in nums_) if nums_[0] else "0"
