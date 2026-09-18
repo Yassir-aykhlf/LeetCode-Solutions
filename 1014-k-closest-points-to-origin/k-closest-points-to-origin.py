@@ -1,3 +1,3 @@
 class Solution:
-    def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
-        return sorted(points, key=lambda pt: pt[0]*pt[0] + pt[1]*pt[1])[:k]
+    def kClosest(self, points: list[list[int]], k: int) -> list[list[int]]:
+        return heapq.nsmallest(k, points, key=lambda pt: pt[0]**2 + pt[1]**2)
