@@ -3,7 +3,7 @@ class Solution:
         nums.sort()
         res = []
         n = len(nums)
-        for i in range(n - 2):
+        for i in range(len(nums) - 2):
             if i > 0 and nums[i] == nums[i - 1]:
                 continue
             l = i + 1
@@ -18,8 +18,8 @@ class Solution:
                         r -= 1
                     l += 1
                     r -= 1
-                elif comb < 0:
-                    l += 1
-                else:
+                elif comb > 0:
                     r -= 1
+                else:
+                    l += 1
         return res
