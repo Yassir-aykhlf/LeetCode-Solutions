@@ -9,9 +9,8 @@ class Solution:
             if l_val > r_val:
                 res[w] = l_val
                 l += 1
-                w -= 1
             else:
                 res[w] = r_val
                 r -= 1
-                w -= 1
+            w -= 1
         return res
