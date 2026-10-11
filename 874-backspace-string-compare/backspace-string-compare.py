@@ -1,6 +1,6 @@
 class Solution:
     def backspaceCompare(self, s: str, t: str) -> bool:
-        def proc(s):
+        def solve(s):
             stack = []
             for c in s:
                 if c == '#':
@@ -8,5 +8,5 @@ class Solution:
                         stack.pop()
                 else:
                     stack.append(c)
-            return ''.join(stack)
-        return proc(s) == proc(t)
+            return stack
+        return solve(s) == solve(t)
