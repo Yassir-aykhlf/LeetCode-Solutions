@@ -1,8 +1,8 @@
 class Solution:
-    def transpose(self, matrix: List[List[int]]) -> List[List[int]]:
+    def transpose(self, matrix: list[list[int]]) -> list[list[int]]:
         m, n = len(matrix), len(matrix[0])
-        result = [[0] * m for _ in range(n)]
+        res = [[0] * m for i in range(n)]
         for i in range(m):
             for j in range(n):
-                result[j][i] = matrix[i][j]
-        return result
+                res[j][i] = matrix[i][j]
+        return res
