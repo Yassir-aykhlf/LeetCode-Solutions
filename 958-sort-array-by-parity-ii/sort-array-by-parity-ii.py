@@ -1,13 +1,12 @@
 class Solution:
-    def sortArrayByParityII(self, nums: List[int]) -> List[int]:
-        result = [0] * len(nums)
-        odd = 1
-        even = 0
-        for n in nums:
-            if n % 2:
-                result[odd] = n
-                odd += 2
+    def sortArrayByParityII(self, nums: list[int]) -> list[int]:
+        res = [0] * len(nums)
+        o, e = 1, 0
+        for i in range(len(nums)):
+            if nums[i] % 2:
+                res[o] = nums[i]
+                o += 2
             else:
-                result[even] = n
-                even += 2
-        return result
+                res[e] = nums[i]
+                e += 2
+        return res
