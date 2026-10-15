@@ -1,6 +1,6 @@
 class Solution:
     def generateMatrix(self, n: int) -> list[list[int]]:
-        res = [[0] * n for i in range(n)]
+        res = [[0] * n for _ in range(n)]
         r, c = 0, 0
         dr, dc = 0, 1
         for i in range(1, n * n + 1):
