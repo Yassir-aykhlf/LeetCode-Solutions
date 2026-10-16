@@ -1,17 +1,14 @@
 class Solution:
     def compress(self, chars: list[str]) -> int:
-        n = len(chars)
-        w = 0
-        i = 0
-        while i < len(chars):
-            char = chars[i]
-            j = i
-            while j < len(chars) and chars[j] == char:
+        w, r = 0, 0
+        while r < len(chars):
+            j = r
+            while j < len(chars) and chars[j] == chars[r]:
                 j += 1
-            count = j - i
-            i = j
-            chars[w] = char
+            count = j - r
+            chars[w] = chars[r]
             w += 1
+            r = j
             if count > 1:
                 for c in str(count):
                     chars[w] = c
