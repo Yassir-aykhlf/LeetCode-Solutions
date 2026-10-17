@@ -1,16 +1,20 @@
 class Solution:
-    def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
-        ROW, COL = len(grid), len(grid[0])
-        max_area = 0
-        def bfs(row, col):
-            if row < 0 or row >= ROW or \
-                col < 0 or col >= COL or \
-                not grid[row][col]:
-                return 0
-            grid[row][col] = 0
-            return 1 + bfs(row-1,col) + bfs(row+1,col) + bfs(row,col-1) + bfs(row,col+1)
-        for row in range(ROW):
-            for col in range(COL):
-                if grid[row][col]:
-                    max_area = max(max_area, bfs(row, col))
-        return max_area
+    def maxAreaOfIsland(self, grid: list[list[int]]) -> int:
+        res = 0
+        m, n = len(grid), len(grid[0])
+        visited = set()
+        def dfs(r, c):
+            if not (
+                0 <= r < m and
+                0 <= c < n and
+                (r, c) not in visited and 
+                grid[r][c]
+            ):  return 0
+            visited.add((r, c))
+            return 1 + dfs(r + 1, c) + dfs(r - 1, c) + dfs(r, c + 1) + dfs(r, c - 1)
+
+        for r in range(m):
+            for c in range(n):
+                if grid[r][c] and (r, c) not in visited:
+                    res = max(res, dfs(r, c))
+        return res
