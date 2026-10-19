@@ -1,22 +1,29 @@
 class Solution:
-    def pacificAtlantic(self, heights: List[List[int]]) -> List[List[int]]:
-        ROW, COL = len(heights), len(heights[0])
-        pacific_set = set()
-        atlantic_set = set()
-        direction = [(-1, 0), (1, 0), (0, -1), (0, 1)]
-        def bfs(row, col, ocean_set, prev_height):
-            if row < 0 or row >= ROW or \
-                col < 0 or col >= COL or \
-                (row, col) in ocean_set or \
-                heights[row][col] < prev_height:
-                return
-            ocean_set.add((row, col))
-            for dr, dc in direction:
-                bfs(row + dr, col + dc, ocean_set, heights[row][col])
-        for row in range(ROW):
-            bfs(row, 0, pacific_set, heights[row][0])
-            bfs(row, COL-1, atlantic_set, heights[row][COL-1])
-        for col in range(COL):
-            bfs(0, col, pacific_set, heights[0][col])
-            bfs(ROW-1, col, atlantic_set, heights[ROW-1][col])
-        return [list(coord) for coord in (pacific_set & atlantic_set)]
+    def pacificAtlantic(self, heights: list[list[int]]) -> list[list[int]]:
+        pac_set = set()
+        atl_set = set()
+        m, n = len(heights), len(heights[0])
+        bl, tr = (m - 1, 0), (0, n - 1)
+        def dfs(coor, prev, _set):
+            r, c = coor
+            if not (
+                0 <= r < m and
+                0 <= c < n and
+                (r, c) not in _set and
+                heights[r][c] >= prev
+            ):  return
+            curr = heights[r][c]
+            _set.add((r, c))
+            dfs((r + 1, c), curr, _set)
+            dfs((r - 1, c), curr, _set)
+            dfs((r, c + 1), curr, _set)
+            dfs((r, c - 1), curr, _set)
+        for r in range(m):
+            dfs((r, 0), float("-inf"), pac_set)
+        for c in range(n):
+            dfs((0, c), float("-inf"), pac_set)
+        for r in range(m):
+            dfs((r, n - 1), float("-inf"), atl_set)
+        for c in range(n):
+            dfs((m - 1, c), float("-inf"), atl_set)
+        return list(pac_set & atl_set)
