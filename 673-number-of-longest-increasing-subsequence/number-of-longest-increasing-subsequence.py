@@ -8,7 +8,7 @@ class Solution:
                 if nums[j] < nums[i]:
                     if lengths[i] < lengths[j] + 1:
                         lengths[i] = lengths[j] + 1
-                        counts[i] = counts[j] 
+                        counts[i] = counts[j]
                     elif lengths[i] == lengths[j] + 1:
                         counts[i] += counts[j]
         lis = max(lengths)
