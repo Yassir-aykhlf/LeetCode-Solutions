@@ -6,10 +6,10 @@ class Solution:
         for i in range(n):
             for j in range(i):
                 if nums[j] < nums[i]:
-                    if lengths[i] < lengths[j] + 1:
+                    if lengths[j] + 1 > lengths[i]:
                         lengths[i] = lengths[j] + 1
                         counts[i] = counts[j]
-                    elif lengths[i] == lengths[j] + 1:
+                    elif lengths[j] + 1 == lengths[i]:
                         counts[i] += counts[j]
         lis = max(lengths)
         return sum(c for l, c in zip(lengths, counts) if l == lis)
