@@ -1,24 +1,27 @@
 class Solution:
     def pacificAtlantic(self, heights: list[list[int]]) -> list[list[int]]:
-        m, n = len(heights), len(heights[0])
         pac_set = set()
         atl_set = set()
-        def dfs(r, c, _set, prev_height=float("-inf")):
+        R, C = len(heights), len(heights[0])
+        def dfs(r, c, set_, prev=float("-inf")):
             if not (
-                0 <= r < m and
-                0 <= c < n and
-                (r, c) not in _set and
-                heights[r][c] >= prev_height
+                0 <= r < R and
+                0 <= c < C and
+                (r, c) not in set_ and
+                heights[r][c] >= prev
             ):  return
-            _set.add((r, c))
-            dfs(r+1, c, _set, heights[r][c])
-            dfs(r-1, c, _set, heights[r][c])
-            dfs(r, c+1, _set, heights[r][c])
-            dfs(r, c-1, _set, heights[r][c])
-        for i in range(m):
+            set_.add((r, c))
+            v = heights[r][c]
+            dfs(r+1, c, set_, v)
+            dfs(r-1, c, set_, v)
+            dfs(r, c+1, set_, v)
+            dfs(r, c-1, set_, v)
+
+        for i in range(R):
             dfs(i, 0, pac_set)
-            dfs(i, n - 1, atl_set)
-        for i in range(n):
+            dfs(i, C-1, atl_set)
+        for i in range(C):
             dfs(0, i, pac_set)
-            dfs(m - 1, i, atl_set)
+            dfs(R-1, i, atl_set)
+        
         return list(pac_set & atl_set)
